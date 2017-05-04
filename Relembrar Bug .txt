@@ -1,0 +1,3 @@
+possiveis bugs:
+?callback=? ou callback?=
+no arquivo js na chamada ajax 

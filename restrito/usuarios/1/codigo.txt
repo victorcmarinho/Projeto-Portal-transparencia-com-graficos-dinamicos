@@ -1,0 +1,160 @@
+<?php
+class ProdutoAvulso{
+    protected $id;
+    protected $nome;
+    protected $preco;
+    protected $tempo;
+    public function __construct($nome,$preco,$tempo) {
+        $this->nome = $nome;
+        $this->preco = $preco;
+        $this->tempo = $tempo;
+    }
+    public function getId() {
+        return $this->id;
+    }
+    public function getNome() {
+        return $this->nome;
+    }
+    public function getPreco() {
+        return $this->preco;
+    }
+    public function getTempo() {
+        return $this->tempo;
+    }
+    public function setPreco($a){
+        $this->preco = $a;
+    }
+}
+class ProdutoComposto extends ProdutoAvulso {
+    protected $ingrediente=[];
+    function __construct($nome){
+        $this->nome = $nome;
+    }
+    public function formValor(){
+        $valor = 0;
+        foreach ($this->ingrediente as $value){
+            $valor += $value->getPreco();
+        }
+        $this->preco =  $valor;
+        $this->preco;
+    }
+    public function getPreco() {
+        $this->formValor();
+        return parent::getPreco();
+    }
+
+    public function addIngrediente($produto){
+        array_push($this->ingrediente, $produto); 
+    }
+    public function formTempo(){
+        $tempo = 0;
+        foreach ($this->ingrediente as $value){
+            $tempo+= $value->getTempo();
+        }
+        $this->tempo = $tempo;
+        return $this->tempo;
+    }
+    public function getTempo() {
+        $this->formTempo();
+        return parent::getTempo();
+    }
+}
+class Lanchonete{
+    public $itens = [];
+    public $cardapio = [];
+    public function addItem($produto){
+        array_push($this->itens, $produto);
+    }
+    public function addCardapio($produto){
+        array_push($this->cardapio,$produto);
+    }
+    public function incluirAutomatico(){
+        $this->addItem(new ProdutoAvulso('Pao', 0.5,1));
+        $this->addItem(new ProdutoAvulso('Carne', 1.50,8));
+        $this->addItem(new ProdutoAvulso('Queijo', 2.5,2));
+        $this->addItem(new ProdutoAvulso('Queijo Parmesão', 2.5,2));
+        $xBurgue = new ProdutoComposto('Xburger');
+        $xBurgue->addIngrediente($this->itens[0]);
+        $xBurgue->addIngrediente($this->itens[1]);
+        $xBurgue->addIngrediente($this->itens[2]);
+        $this->addCardapio($xBurgue);
+    }
+    public function deletarProduto($id){
+        unset($this->cardapio[$id]);
+    }
+    public function deletarIgrediente($id){
+        unset($this->itens[$id]);
+    }    
+    public function AumentarPreco($porcentagem){
+        foreach($this->itens as $value){
+            $valor = $value->getPreco();
+            $valor = $valor *= 1 + $porcentagem / 100;
+            $value->setPreco($valor);
+        }
+    }
+    public function getCardapio(){
+        echo '<br><strong>Menu</strong><br>';
+        foreach($this->cardapio as $value){
+            echo $value->getNome() . '.............. R$:'.$value->getPreco().'<br>';
+        }
+        echo "<br><strong>Itens</strong><br>";
+        foreach($this->itens as $value){
+            echo $value->getNome() . '.............. R$:'.$value->getPreco().'<br>';
+        }
+        
+    }
+}
+class SistemaCompras{
+    public $carrinho = [];
+    public $tempoT;
+    public $valorT;
+    
+    public function formValor(){
+        $valor = 0;
+        foreach ($this->carrinho as $value){
+            $valor += $value->getPreco();
+        }
+        return $this->valorT = $valor;
+    }
+    public function formTempo(){
+        $tempo = 0;
+        foreach ($this->carrinho as $value){
+            $tempo+=$value->getTempo();
+        }
+        $this->tempoT = $tempo;
+    }
+    public function getTempo(){
+        $this->formTempo();
+        return $this->tempoT;
+    }
+    public function getValor(){  
+        $this->formValor();
+        return $this->valorT;
+    }
+
+    public function addProduto($produto){
+        array_push($this->carrinho, $produto); 
+    }
+    public function deletaItem($id){
+        unset($this->carrinho[$id]);
+    }
+}
+$lanchonete = new Lanchonete();
+$lanchonete->incluirAutomatico();
+$lanchonete->getCardapio();
+$lanchonete->deletarIgrediente(3);
+$lanchonete->getCardapio();
+$lanchonete->AumentarPreco(0.5);
+$lanchonete->getCardapio();
+
+$pedido = new SistemaCompras();
+$pedido->addProduto($lanchonete->cardapio[0]);
+$pedido->addProduto($lanchonete->cardapio[0]);
+$pedido->addProduto($lanchonete->cardapio[0]);
+$pedido->addProduto($lanchonete->cardapio[0]);
+echo $pedido->getValor() ."<br>";
+echo $pedido->getTempo() ."<br>";
+echo $pedido->deletaItem(2);
+echo $pedido->getValor() ."<br>";
+echo $pedido->getTempo() ."<br>";
+?>
