@@ -119,7 +119,6 @@ class DBO{
             }
         }
         $this->query($sql);
-
         for ($i = 0; $i < count($dados); $i++) {
             $sql = "INSERT IGNORE INTO `alinea` (`idalinea`, `subalinea_idsubalinea`) VALUES ('".$dados[$i][14]."','".$dados[$i][15]."');"
                     . "INSERT IGNORE INTO `poder` (`idpoder`) VALUES ('".$dados[$i][6]."');"
@@ -134,25 +133,24 @@ class DBO{
                     . "INSERT IGNORE INTO `receita` (`idreceita`, `valor`, `categoria_idcategoria`, `aplicacao_idaplicacao`, `data`, `poder_idpoder`, `fonte_recurso_idfonte_recurso`, `aplicacao_variavel_idaplicacao_variavel`, `fonte_idfonte`, `rubrica_idrubrica`, `alinea_idalinea`, `ano_exe`, `mes_exe`, `orgao_id`) VALUES ('".$dados[$i][0]."', '".$dados[$i][16]."', '".$dados[$i][10]."', '".$dados[$i][8]."', '".$dados[$i][17]."','".$dados[$i][6]."','".$dados[$i][7]."','".$dados[$i][9]."','".$dados[$i][12]."','".$dados[$i][13]."','".$dados[$i][14]."', '".$dados[$i][1]."', '".$dados[$i][4]."', '".$dados[$i][2]."');";
             echo "$sql"."<br>";
         }
-
-           $this->query($sql);
+        $this->query($sql);
     }
     public function  setDespesa($dados){
         for ($i = 0; $i < count($dados); $i++) {
             $sql = "INSERT INTO `acao` (`idacao`, `nome`) VALUES (,)"
-                    . "INSERT INTO `programa` (`idprograma`, `nome`) VALUES ('', NULL)"
-                    . "INSERT INTO `tipo_despesa` (`idtipo_despesa`, `nome`) VALUES ('', NULL)"
-                    . "INSERT INTO `modalidade` (`idmodalidade`, `nome`) VALUES ('', NULL)"
-                    . "INSERT INTO `numero_empenho` (`numero`) VALUES ('')"
-                    . "INSERT INTO `elemento` (`idelemento`, `nome`) VALUES ('', NULL)"
-                    . "INSERT INTO `sub_funcao` (`idsub_funcao`, `nome`) VALUES ('', NULL)"
-                    . "INSERT INTO `funcao` (`idfuncao`, `nome`, `sub_funcao_idsub_funcao`) VALUES ('', NULL, '')"
-                    . "INSERT INTO `pessoas` (`nome`, `cpfcnpj`) VALUES (NULL, '')"
-                    . "INSERT INTO `aplicacao` (`idaplicacao`, `nome`) VALUES ('', NULL)"
-                    . "INSERT INTO `fonte_recurso` (`idfonte_recurso`, `nome`) VALUES ('', NULL)"
-                    . "INSERT INTO `exercicio` (`idexercicio`, `ano`, `mes`) VALUES ('', NULL, NULL)"
-                    . "INSERT INTO `orgao` (`id`, `nome`, `descricao`, `exercicio_idexercicio`) VALUES ('', NULL, NULL, '')"
-                    . "INSERT INTO `despesa` (`iddespesa`, `data`, `tipo_despesa_idtipo_despesa`, `pessoas_id`, `valor`, `funcao_idfuncao`, `pessoas_cpfcnpj`, `programa_idprograma`, `acao_idacao`, `elemento_idelemento`, `historico`, `fonte_recurso_idfonte_recurso`, `aplicacao_idaplicacao`, `numero_empenho_numero`, `modalidade_idmodalidade`, `orgao_id`) VALUES ('', NULL, '', '', NULL, '', '', '', '', '', NULL, '', '', '', '', '')";
+                . "INSERT INTO `programa` (`idprograma`, `nome`) VALUES ('', NULL)"
+                . "INSERT INTO `tipo_despesa` (`idtipo_despesa`, `nome`) VALUES ('', NULL)"
+                . "INSERT INTO `modalidade` (`idmodalidade`, `nome`) VALUES ('', NULL)"
+                . "INSERT INTO `numero_empenho` (`numero`) VALUES ('')"
+                . "INSERT INTO `elemento` (`idelemento`, `nome`) VALUES ('', NULL)"
+                . "INSERT INTO `sub_funcao` (`idsub_funcao`, `nome`) VALUES ('', NULL)"
+                . "INSERT INTO `funcao` (`idfuncao`, `nome`, `sub_funcao_idsub_funcao`) VALUES ('', NULL, '')"
+                . "INSERT INTO `pessoas` (`nome`, `cpfcnpj`) VALUES (NULL, '')"
+                . "INSERT INTO `aplicacao` (`idaplicacao`, `nome`) VALUES ('', NULL)"
+                . "INSERT INTO `fonte_recurso` (`idfonte_recurso`, `nome`) VALUES ('', NULL)"
+                . "INSERT INTO `exercicio` (`idexercicio`, `ano`, `mes`) VALUES ('', NULL, NULL)"
+                . "INSERT INTO `orgao` (`id`, `nome`, `descricao`, `exercicio_idexercicio`) VALUES ('', NULL, NULL, '')"
+                . "INSERT INTO `despesa` (`iddespesa`, `data`, `tipo_despesa_idtipo_despesa`, `pessoas_id`, `valor`, `funcao_idfuncao`, `pessoas_cpfcnpj`, `programa_idprograma`, `acao_idacao`, `elemento_idelemento`, `historico`, `fonte_recurso_idfonte_recurso`, `aplicacao_idaplicacao`, `numero_empenho_numero`, `modalidade_idmodalidade`, `orgao_id`) VALUES ('', NULL, '', '', NULL, '', '', '', '', '', NULL, '', '', '', '', '')";
         }
     }
 
