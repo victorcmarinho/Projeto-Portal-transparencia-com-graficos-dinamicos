@@ -176,7 +176,7 @@ class DBO{
             $this->query($sql);
             $sql= "INSERT IGNORE INTO `orgao` (`id`, `descricao`) VALUES ('".$dados[$i][2]."', '".$dados[$i][3]."');";
             $this->query($sql);
-            $sql= "INSERT  INTO `despesa` (`iddespesa`, `tipo_despesa_idtipo_despesa`, `numero_empenho_numero`, `pessoas_cpfcnpj`, `data`, `valor`, `funcao_idfuncao`, `programa_idprograma`, `acao_idacao`, `fonte_recurso_idfonte_recurso`, `aplicacao_idaplicacao`, `modalidade_idmodalidade`, `elemento_idelemento`, `historico`, `orgao_id`, `ano_exe`, `mes_exe`) VALUES ('".$dados[$i][0]."', '".$dados[$i][6]."', '".$dados[$i][7]."', '".$dados[$i][8]."', '".$dados[$i][10]."', '".$dados[$i][11]."', '".$dados[$i][12]."', '".$dados[$i][14]."', '".$dados[$i][16]."', '".$dados[$i][18]."', '".$dados[$i][19]."', '".$dados[$i][20]."', '".$dados[$i][21]."', '".$dados[$i][22]."', '".$dados[$i][2]."', '".$dados[$i][1]."', '".$dados[$i][4]."');";
+            $sql= "INSERT IGNORE INTO `despesa` (`iddespesa`, `tipo_despesa_idtipo_despesa`, `numero_empenho_numero`, `pessoas_cpfcnpj`, `data`, `valor`, `funcao_idfuncao`, `programa_idprograma`, `acao_idacao`, `fonte_recurso_idfonte_recurso`, `aplicacao_idaplicacao`, `modalidade_idmodalidade`, `elemento_idelemento`, `historico`, `orgao_id`, `ano_exe`, `mes_exe`) VALUES ('".$dados[$i][0]."', '".$dados[$i][6]."', '".$dados[$i][7]."', '".$dados[$i][8]."', '".$dados[$i][10]."', '".$dados[$i][11]."', '".$dados[$i][12]."', '".$dados[$i][14]."', '".$dados[$i][16]."', '".$dados[$i][18]."', '".$dados[$i][19]."', '".$dados[$i][20]."', '".$dados[$i][21]."', '".$dados[$i][22]."', '".$dados[$i][2]."', '".$dados[$i][1]."', '".$dados[$i][4]."');";
             $this->query($sql);
             //echo $sql ."<br>";
         }
