@@ -18,7 +18,7 @@ class DBO{
         $this->mysqli = new mysqli($this->server, $this->user, $this->password, $this->bd);
     }
      public function query($query){
-        return mysqli_query($this->mysqli, $query);
+       # return mysqli_query($this->mysqli, $query);
     }
     public function fetchRecords($RS)
     {
@@ -116,6 +116,7 @@ class DBO{
         for($i = 0; $i < count($dados); $i++){
             if($dados[$i][16]!=NULL){
                 $sql = "INSERT IGNORE INTO `subalinea` (`idsubalinea`) VALUES ('".$dados[$i][15]."');";
+                $this->query($sql);
             }
         }
         $this->query($sql);
@@ -131,27 +132,29 @@ class DBO{
                     . "INSERT IGNORE INTO `fonte` (`idfonte`) VALUES ('".$dados[$i][12]."');"
                     . "INSERT IGNORE INTO `rubrica` (`idrubrica`) VALUES ('".$dados[$i][13]."');"
                     . "INSERT IGNORE INTO `receita` (`idreceita`, `valor`, `categoria_idcategoria`, `aplicacao_idaplicacao`, `data`, `poder_idpoder`, `fonte_recurso_idfonte_recurso`, `aplicacao_variavel_idaplicacao_variavel`, `fonte_idfonte`, `rubrica_idrubrica`, `alinea_idalinea`, `ano_exe`, `mes_exe`, `orgao_id`) VALUES ('".$dados[$i][0]."', '".$dados[$i][16]."', '".$dados[$i][10]."', '".$dados[$i][8]."', '".$dados[$i][17]."','".$dados[$i][6]."','".$dados[$i][7]."','".$dados[$i][9]."','".$dados[$i][12]."','".$dados[$i][13]."','".$dados[$i][14]."', '".$dados[$i][1]."', '".$dados[$i][4]."', '".$dados[$i][2]."');";
-            echo "$sql"."<br>";
+            $this->query($sql);
         }
-        $this->query($sql);
+
     }
     public function  setDespesa($dados){
         for ($i = 0; $i < count($dados); $i++) {
-            $sql = "INSERT INTO `acao` (`idacao`, `nome`) VALUES (,)"
-                . "INSERT INTO `programa` (`idprograma`, `nome`) VALUES ('', NULL)"
-                . "INSERT INTO `tipo_despesa` (`idtipo_despesa`, `nome`) VALUES ('', NULL)"
-                . "INSERT INTO `modalidade` (`idmodalidade`, `nome`) VALUES ('', NULL)"
-                . "INSERT INTO `numero_empenho` (`numero`) VALUES ('')"
-                . "INSERT INTO `elemento` (`idelemento`, `nome`) VALUES ('', NULL)"
-                . "INSERT INTO `sub_funcao` (`idsub_funcao`, `nome`) VALUES ('', NULL)"
-                . "INSERT INTO `funcao` (`idfuncao`, `nome`, `sub_funcao_idsub_funcao`) VALUES ('', NULL, '')"
-                . "INSERT INTO `pessoas` (`nome`, `cpfcnpj`) VALUES (NULL, '')"
-                . "INSERT INTO `aplicacao` (`idaplicacao`, `nome`) VALUES ('', NULL)"
-                . "INSERT INTO `fonte_recurso` (`idfonte_recurso`, `nome`) VALUES ('', NULL)"
-                . "INSERT INTO `exercicio` (`idexercicio`, `ano`, `mes`) VALUES ('', NULL, NULL)"
-                . "INSERT INTO `orgao` (`id`, `nome`, `descricao`, `exercicio_idexercicio`) VALUES ('', NULL, NULL, '')"
-                . "INSERT INTO `despesa` (`iddespesa`, `data`, `tipo_despesa_idtipo_despesa`, `pessoas_id`, `valor`, `funcao_idfuncao`, `pessoas_cpfcnpj`, `programa_idprograma`, `acao_idacao`, `elemento_idelemento`, `historico`, `fonte_recurso_idfonte_recurso`, `aplicacao_idaplicacao`, `numero_empenho_numero`, `modalidade_idmodalidade`, `orgao_id`) VALUES ('', NULL, '', '', NULL, '', '', '', '', '', NULL, '', '', '', '', '')";
+            $sql = "INSERT IGNORE INTO `acao` (`idacao`, `nome`) VALUES ('".$dados[$i][16]."','".$dados[$i][17]."');"
+                . "INSERT IGNORE INTO `programa` (`idprograma`, `nome`) VALUES ('".$dados[$i][14]."', '".$dados[$i][15]."');"
+                . "INSERT IGNORE INTO `tipo_despesa` (`idtipo_despesa`) VALUES ('".$dados[$i][6]."');"
+                . "INSERT IGNORE INTO `modalidade` (`idmodalidade`) VALUES ('".$dados[$i][20]."');"
+                . "INSERT IGNORE INTO `numero_empenho` (`numero`) VALUES ('".$dados[$i][7]."');"
+                . "INSERT IGNORE INTO `elemento` (`idelemento`) VALUES ('".$dados[$i][21]."');"
+                . "INSERT IGNORE INTO `sub_funcao` (`idsub_funcao`) VALUES ('".$dados[$i][13]."');"
+                . "INSERT IGNORE INTO `funcao` (`idfuncao`, `sub_funcao_idsub_funcao`) VALUES ('".$dados[$i][12]."','".$dados[$i][13]."');"
+                . "INSERT IGNORE INTO `pessoas` (`nome`, `cpfcnpj`) VALUES ('".$dados[$i][9]."', '".$dados[$i][8]."');"
+                . "INSERT IGNORE INTO `aplicacao` (`idaplicacao`) VALUES ('".$dados[$i][19]."');"
+                . "INSERT IGNORE INTO `fonte_recurso` (`idfonte_recurso`) VALUES ('".$dados[$i][18]."');"
+                . "INSERT IGNORE INTO `orgao` (`id`, `descricao`) VALUES ('".$dados[$i][2]."', '".$dados[$i][3]."');"
+                . "INSERT  INTO `despesa` (`iddespesa`, `tipo_despesa_idtipo_despesa`, `numero_empenho_numero`, `pessoas_cpfcnpj`, `data`, `valor`, `funcao_idfuncao`, `programa_idprograma`, `acao_idacao`, `fonte_recurso_idfonte_recurso`, `aplicacao_idaplicacao`, `modalidade_idmodalidade`, `elemento_idelemento`, `historico`, `orgao_id`, `ano_exe`, `mes_exe`) VALUES ('".$dados[$i][0]."', '".$dados[$i][6]."', '".$dados[$i][7]."', '".$dados[$i][8]."', '".$dados[$i][10]."', '".$dados[$i][11]."', '".$dados[$i][12]."', '".$dados[$i][14]."', '".$dados[$i][16]."', '".$dados[$i][18]."', '".$dados[$i][19]."', '".$dados[$i][20]."', '".$dados[$i][21]."', '".$dados[$i][22]."', '".$dados[$i][2]."', '".$dados[$i][1]."', '".$dados[$i][4]."');";
+            //$this->query($sql);
+            echo $sql ."<br>";
         }
+
     }
 
 }
