@@ -1,16 +1,23 @@
 <?php
     include "../repositorio/Master.php";
+    include "../repositorio/csv.php";
     echo "<pre>";
     print_r($_FILES);
     print_r($_POST);
     echo "</pre>";
     if(isset($_FILES['arquivo'])){
-        $tipos = array('text/csv');
-        if(array_search($_FILES['arquivo']['type'], $tipos)){
-            $nomearquivo = "temporario/";
+        $tipos = array('text/csv','.csv','csv','application/vnd.ms-excel');
+        if(array_search($_FILES['arquivo']['type'] , $tipos)){
+
+            $nomearquivo = "temporario/".$_FILES['arquivo']['name'];
             copy($_FILES['arquivo']['tmp_name'], $nomearquivo);
         }
     }
+    $csv = new csv("temporario/".$_FILES['arquivo']['name'],";");
+    set_time_limit(600);
+    $csv->getObject();
+    $dbo->setReceita($csv->getDados());
+
 ?>
     <!DOCTYPE html>
     <html lang="PT-BR">
@@ -95,11 +102,14 @@
                                         <p>Arraste o arquivo para o campo a baixo ou clique e selecione o arquivo para upload dos dados.</p>
                                         <form id="dropzone" action="cadastroreceita.php" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="dropzone">
                                         </form>
-
                                         <div class="btn-toolbar pull-right" role="toolbar">
                                             <input class="btn btn-danger  btn-group" role="group" type="reset" id="dropzoneCancel" value="Cancelar">
                                             <input class="btn btn-success  btn-group" role="group" type="submit" id="dropzoneSubmit">
                                         </div>
+                                        <form action="cadastroreceita.php" enctype="multipart/form-data" method="post">
+                                            <input type="file" name="arquivo" accept=".csv">
+                                            <input class="btn btn-default" type="submit" value="Enviar">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
