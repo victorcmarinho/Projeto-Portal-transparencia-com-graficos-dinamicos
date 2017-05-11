@@ -1,3 +1,19 @@
+/*
+$(document).ready(function(){
+        $("#TabelaReceita").DataTable({
+            "language": {
+            "lengthMenu": "Mostrando _MENU_ registros por pagina",
+            "zeroRecords": "Nada encontrado - desculpe",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro dísponivel",
+            "infoFiltered": "(filtrado de  _MAX_ registros no total)"
+            },
+            "ajax": "dadosreceitatabela.php?callback",
+
+        });
+
+    });
+*/
 $("document").ready(function () {
     function receitaTabela() {
         //variáveis
@@ -7,7 +23,7 @@ $("document").ready(function () {
         $.ajax({
             url: url,
             cache: false,
-            dataType: "json",
+
             beforeSend: function () {
                 $("h2").html("Carregando..."); //Carregando
             },
@@ -21,11 +37,11 @@ $("document").ready(function () {
                     //Laço para criar linhas da tabela
                     for (var i = 0; i < retorno.length; i++) {
                         itens += "<tr>";
-                        itens += "<td>" + retorno[i].receita_id + "</td>";
-                        itens += "<td>" + retorno[i].descricao + "</td>";
+                        itens += "<td>" + retorno[i].idreceita + "</td>";
+                        itens += "<td>" + retorno[i].aplicacao_idaplicacao + "</td>";
                         itens += "<td>" + retorno[i].data + "</td>";
                         itens += "<td>" + retorno[i].valor + "</td>";
-                        itens += "<td>" + retorno[i].documento + "</td>";
+                        itens += "<td>" + retorno[i].fonte_idfonte + "</td>";
                         itens += "</tr>";
                     }
                     //Preencher a Tabela
@@ -35,8 +51,10 @@ $("document").ready(function () {
                     $("h2").html("Carregado");
                 }
             }
+
         });
     }
+
 
     function ReceitaGrafico() {
         var url = "dadosreceitagrafico.php?callback=?";
@@ -51,6 +69,7 @@ $("document").ready(function () {
                 $('h2').html("Erro: Fonte de dados Gráfico");
             },
             success: function (dados) {
+
                 if (dados[0].erro) {
                     $("h2").html(retorno[0].erro);
                 } else {
@@ -71,6 +90,7 @@ $("document").ready(function () {
                     }]
                     });
                 }
+
             }
         });
     };

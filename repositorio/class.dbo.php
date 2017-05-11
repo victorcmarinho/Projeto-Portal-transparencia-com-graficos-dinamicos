@@ -1,3 +1,4 @@
+
 <?php
 header('Content-Type: text/html; charset=utf-8');
 class DBO{
@@ -8,6 +9,7 @@ class DBO{
     protected $connection;
     protected $mysqli;
     public function __construct($server, $user, $password, $bd){
+
         $this->server     = $server;
         $this->user       = $user;
         $this->password   = $password;
@@ -17,12 +19,17 @@ class DBO{
     private function connect(){
         #return  mysqli_connect($this->server,$this->user,$this->password,$this->bd);
         $this->mysqli = new mysqli($this->server, $this->user, $this->password, $this->bd);
+        if (!$this->mysqli->set_charset("utf8")) {
+            printf("Error loading character set utf8: %s\n", $mysqli->error);
+            exit();
+        }
     }
      public function query($query){
         $res = mysqli_query($this->mysqli, $query);
         if(!$res){
             echo "Errormessage: %s\n".  $this->mysqli->error."<br>";
         }
+        return $res;
     }
     public function fetchRecords($RS)
     {
@@ -33,13 +40,15 @@ class DBO{
         return mysqli_num_rows($RS);
     }
    public function tabela ($query){
-        if ($result = $this->query($query)) {
+       if ($result = $this->query($query)) {
             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                 //$row["valor"]= number_format($row["valor"],2,',',' ');
-                $row["data"]= date('d/m/Y',strtotime($row["data"]));
+                //$row["data"]= date('d/m/Y',strtotime($row["data"]));
                 $myArray[] = $row;
             }
             return $myArray;
+        }else{
+            echo "0 results";
         }
     }
     public function grafico ($query){
@@ -147,14 +156,17 @@ class DBO{
             $this->query($sql);
             $sql = "INSERT IGNORE INTO `receita` (`idreceita`, `valor`, `categoria_idcategoria`, `aplicacao_idaplicacao`, `data`, `poder_idpoder`, `fonte_recurso_idfonte_recurso`, `aplicacao_variavel_idaplicacao_variavel`, `fonte_idfonte`, `rubrica_idrubrica`, `alinea_idalinea`, `ano_exe`, `mes_exe`, `orgao_id`) VALUES ('".$dados[$i][0]."', '".$dados[$i][16]."', '".$dados[$i][10]."', '".$dados[$i][8]."', '".$dados[$i][17]."','".$dados[$i][6]."','".$dados[$i][7]."','".$dados[$i][9]."','".$dados[$i][12]."','".$dados[$i][13]."','".$dados[$i][14]."', '".$dados[$i][1]."', '".$dados[$i][4]."', '".$dados[$i][2]."');";
             $this->query($sql);
+
         }
 
     }
     public function  setDespesa($dados){
+
         for ($i = 0; $i < count($dados); $i++) {
             $sql = "INSERT IGNORE INTO `acao` (`idacao`, `nome`) VALUES ('".$dados[$i][16]."','".$dados[$i][17]."');";
             $this->query($sql);
             $sql= "INSERT IGNORE INTO `programa` (`idprograma`, `nome`) VALUES ('".$dados[$i][14]."','".$dados[$i][15]."');";
+            echo $sql . "<br>";
             $this->query($sql);
             $sql= "INSERT IGNORE INTO `tipo_despesa` (`idtipo_despesa`) VALUES ('".$dados[$i][6]."');";
             $this->query($sql);
@@ -178,7 +190,6 @@ class DBO{
             $this->query($sql);
             $sql= "INSERT IGNORE INTO `despesa` (`iddespesa`, `tipo_despesa_idtipo_despesa`, `numero_empenho_numero`, `pessoas_cpfcnpj`, `data`, `valor`, `funcao_idfuncao`, `programa_idprograma`, `acao_idacao`, `fonte_recurso_idfonte_recurso`, `aplicacao_idaplicacao`, `modalidade_idmodalidade`, `elemento_idelemento`, `historico`, `orgao_id`, `ano_exe`, `mes_exe`) VALUES ('".$dados[$i][0]."', '".$dados[$i][6]."', '".$dados[$i][7]."', '".$dados[$i][8]."', '".$dados[$i][10]."', '".$dados[$i][11]."', '".$dados[$i][12]."', '".$dados[$i][14]."', '".$dados[$i][16]."', '".$dados[$i][18]."', '".$dados[$i][19]."', '".$dados[$i][20]."', '".$dados[$i][21]."', '".$dados[$i][22]."', '".$dados[$i][2]."', '".$dados[$i][1]."', '".$dados[$i][4]."');";
             $this->query($sql);
-            //echo $sql ."<br>";
         }
     }
 
