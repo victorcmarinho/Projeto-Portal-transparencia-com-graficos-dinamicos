@@ -23,6 +23,12 @@ class csv{
             $line_count = -1;
         }
         while ($line_count < $max_lines && ($row = fgetcsv($this->arquivo, $this->tamanho, $this->delimitador)) !== FALSE) {
+            $i=0;
+            foreach($row as $row1){
+                //echo utf8_decode($row1);
+              $row[$i] = utf8_encode($row1);
+                $i++;
+            }
             $data[] = $row;
             if ($max_lines > 0) {
                 $line_count++;
@@ -30,10 +36,8 @@ class csv{
         }
         $this->dado = $data;
         $this->formata();
-        //$this->utf();
         return $this->dado;
     }
-
     function mostra(){
         echo "<pre>";
         print_r($this->dado);
@@ -46,4 +50,3 @@ class csv{
         return $this->dado;
     }
 }
-

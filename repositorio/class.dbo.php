@@ -166,7 +166,6 @@ class DBO{
             $sql = "INSERT IGNORE INTO `acao` (`idacao`, `nome`) VALUES ('".$dados[$i][16]."','".$dados[$i][17]."');";
             $this->query($sql);
             $sql= "INSERT IGNORE INTO `programa` (`idprograma`, `nome`) VALUES ('".$dados[$i][14]."','".$dados[$i][15]."');";
-            echo $sql . "<br>";
             $this->query($sql);
             $sql= "INSERT IGNORE INTO `tipo_despesa` (`idtipo_despesa`) VALUES ('".$dados[$i][6]."');";
             $this->query($sql);
