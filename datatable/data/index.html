@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <script src="../jquery.dataTables.min.js"></script>
+    <link href="../jquery.dataTables.min.css">
+</head>
+
+<body>
+    <section>
+        <table id="receita" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Aplicação</th>
+                    <th>Fonte do recurso</th>
+                    <th>Fonte</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Aplicação</th>
+                    <th>Fonte do recurso</th>
+                    <th>Fonte</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+<script>
+$(document).ready(function() {
+    $('#receita').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "order:[],
+        "ajax":{
+            url: "server.php",
+            type: "POST"
+        } ,
+        "columnDefs":[{
+            "target":[0,3,4],
+            "orderable": false,
+
+        }]
+    } );
+} );
+</script>
+</body>
+
+</html>
