@@ -17,7 +17,7 @@ include_once "../repositorio/Master.php";
         <meta name="robots" content="index,follow">
         <meta property="og:image" content="#">
         <link rel="icon" href="#" sizes="32x32">
-        <title>Receitas</title>
+        <title>Licitação</title>
         <!-- Bootstrap -->
         <link href="../vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
@@ -26,11 +26,8 @@ include_once "../repositorio/Master.php";
         <link href="../build/css/custom.css" rel="stylesheet">
         <link href="../build/css/login.css" rel="stylesheet">
         <link href="../build/css/animate.css" rel="stylesheet">
-        <link href="../vendors/jquery/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../vendors/DataTable/datatables.min.css">
-        <script>
-
-        </script>
+        <link rel="stylesheet" type="text/css" href="../build/css/load.css">
 
     </head>
 
@@ -64,9 +61,9 @@ include_once "../repositorio/Master.php";
                                     </ul>
                                     -->
                                     </li>
-                                    <li><a href="Receita.html"><i class="fa fa-money"></i>Receita</a></li>
-                                    <li><a><i class="fa fa-suitcase"></i>Despesas</a></li>
-                                    <li><a><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a href="../receita/receita.php"><i class="fa fa-money"></i>Receita</a></li>
+                                    <li><a href="../despesa/despesa.php"><i class="fa fa-suitcase"></i>Despesas</a></li>
+                                    <li><a href="licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -89,51 +86,66 @@ include_once "../repositorio/Master.php";
                 <!-- /top navigation -->
                 <!-- page content -->
                 <div id="conteudo" class="right_col" role="main">
-                    <?php if(isset($_POST['excluir'])) { ?>
-                    <div class="alert alert-success alert-dismissable">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Excluido com sucesso!
-                    </div>
-                    <?php } ?>
                     <!-- top tiles -->
                     <!-- Banner
                 <div class="row tile_count">
                     <img class="img-responsive" src="images/banner-todos-por-s%C3%A3o-luis.jpg" alt="Banner">
                 </div>
                 <!-- /top tiles -->
-                    <div class="row">
+                   <img style="height:200px;" id="load" src="../img/ring-alt.svg" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <div id="result" class="row load">
                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInLeftBig">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="tab-content">
                                         <div id="table">
-                                            <table id="TabelaReceita" class="table table-striped table-bordered">
+                                            <table id="TabelaLicitacao" class="table table-striped table-bordered">
                                                 <h1>
                                                     <caption>Receitas</caption>
                                                 </h1>
                                                 <thead>
                                                     <th>ID</th>
-                                                    <th>Aplicação</th>
-                                                    <th>Data</th>
+                                                    <th>Contrato</th>
+                                                    <th>Numero</th>
+                                                    <th>Objetivo</th>
+                                                    <th>Inicio</th>
+                                                    <th>Termino</th>
                                                     <th>Valor</th>
+                                                    <th>Orgão</th>
+                                                    <th>Arquivo</th>
                                                 </thead>
                                                 <tbody>
-                                                    <?php if($result=$dbo->query("SELECT idreceita, aplicacao_idaplicacao,data,valor FROM `receita`")){ ?>
+                                                    <?php if($result=$dbo->query("SELECT * FROM `licitacao`")){ ?>
                                                     <?php if($result){ ?>
                                                     <?php while($row = $result->fetch_assoc()){ ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo $row['idreceita']; ?>
+                                                            <?php echo $row['idlicitacao']; ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $row['aplicacao_idaplicacao']; ?>
+                                                            <?php echo $row['contrato']; ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo date("d/m/Y", strtotime($row['data'])); ?>
+                                                            <?php echo $row['numero']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['objetivo']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['inicio']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['termino']; ?>
                                                         </td>
                                                         <td>
                                                             <?php echo $row['valor']; ?>
                                                         </td>
-
+                                                        <td>
+                                                            <?php echo $row['orgao_id']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['arquivo']; ?>
+                                                        </td>
                                                     </tr>
                                                     <?php } ?>
                                                     <?php } ?>
@@ -142,37 +154,6 @@ include_once "../repositorio/Master.php";
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInLeftBig">
-                                <div class="panel panel-default">
-                                    <div id="coluna"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-12 animated fadeInLeftBig">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div id="pizza"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12 animated fadeInLeftBig">
-                                <div class="panel panel-default ">
-                                    <div class="panel-body">
-                                        <div id="pizza2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12 animated fadeInLeftBig">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div id="pizza3"></div>
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +218,7 @@ include_once "../repositorio/Master.php";
         <script src="../vendors/HighCharts/highstock.js"></script>
         <script src="../vendors/HighCharts/highcharts.js"></script>
         <script src="../vendors/HighCharts/exporting.js"></script>
-        <script src="receita.js" type="text/javascript"></script>
+        <script src="licitacao.js" type="text/javascript"></script>
         <script type="text/javascript" src="../vendors/DataTable/datatables.min.js"></script>
     </body>
 

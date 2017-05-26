@@ -26,11 +26,8 @@ include_once "../repositorio/Master.php";
         <link href="../build/css/custom.css" rel="stylesheet">
         <link href="../build/css/login.css" rel="stylesheet">
         <link href="../build/css/animate.css" rel="stylesheet">
-        <link href="../vendors/jquery/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../vendors/DataTable/datatables.min.css">
-        <script>
-
-        </script>
+        <link rel="stylesheet" type="text/css" href="../build/css/load.css">
 
     </head>
 
@@ -64,9 +61,9 @@ include_once "../repositorio/Master.php";
                                     </ul>
                                     -->
                                     </li>
-                                    <li><a href="Receita.html"><i class="fa fa-money"></i>Receita</a></li>
-                                    <li><a><i class="fa fa-suitcase"></i>Despesas</a></li>
-                                    <li><a><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a href="receita.php"><i class="fa fa-money"></i>Receita</a></li>
+                                    <li><a href="../despesa/despesa.php"><i class="fa fa-suitcase"></i>Despesas</a></li>
+                                    <li><a href="../licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -95,7 +92,8 @@ include_once "../repositorio/Master.php";
                     <img class="img-responsive" src="images/banner-todos-por-s%C3%A3o-luis.jpg" alt="Banner">
                 </div>
                 <!-- /top tiles -->
-                    <div class="row">
+                   <img style="height:200px;" id="load" src="../img/ring-alt.svg" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <div id="result" class="row load">
                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInLeftBig">
                             <div class="panel panel-default">
                                 <div class="panel-body">

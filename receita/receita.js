@@ -213,5 +213,6 @@ function ReceitaGraficoP3() {
 
         });
         $('#TabelaReceita').removeClass('display').addClass('table table-striped table-bordered');
-
+        $('#load').addClass('load');
+        $('#result').removeClass('load');
     });
