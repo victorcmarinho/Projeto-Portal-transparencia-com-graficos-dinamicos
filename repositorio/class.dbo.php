@@ -1,4 +1,3 @@
-
 <?php
 header('Content-Type: text/html; charset=utf-8');
 class DBO{
@@ -62,6 +61,27 @@ class DBO{
             echo $_GET['callback']. '('. json_encode($myArray) . ')';
         }
         return false;
+    }
+    public function graficoD ($query){
+        if ($result = $this->query($query)) {
+            while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                // O valor x é o tempo atual do JavaScript, que é o tempo Unix multiplicado por 1000.
+                $row['data'] = date("d/m/Y", strtotime($row['data']));
+                $row['data'] = strtotime($row['data'])*1000;
+                $row["valor"]= floatval($row["valor"]);
+                $myArray[] = [$row["data"],$row["valor"]];
+            }
+            echo $_GET['callback']. '('. json_encode($myArray) . ')';
+        }
+        return false;
+    }
+    public function graficoPie($query,$aplica){
+        if($result =  $this->query($query)){
+            while($row = $result->fetch_array(MYSQLI_ASSOC)){
+                $array[] = [$row[$aplica],floatval($row['SUM(valor)'])];
+            }
+           echo $_GET['callback']."(".json_encode( $array, JSON_UNESCAPED_UNICODE ).")";
+        }
     }
     #INSERT
     public function incluiRegistro($tabela,$dados){

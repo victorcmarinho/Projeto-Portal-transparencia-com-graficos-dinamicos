@@ -12,6 +12,5 @@ if ($result = $dbo->query("SELECT valor, data FROM receita ")) {
    echo $_GET['callback']. '('. json_encode($myArray) . ')';
 }
 */
-$dbo->grafico("SELECT valor, data FROM receita");
-
+$dbo->graficoD("SELECT valor, data FROM despesa");
 ?>
