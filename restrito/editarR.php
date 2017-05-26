@@ -58,71 +58,141 @@ if(isset($_POST['excluir'])){
     </head>
 
     <body class="nav-md">
-        <div id="result" class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInLeftBig">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="tab-content">
-                            <form action="#" method="post" class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="valor" class="col-sm-2 control-label">Valor</label>
-                                    <div class="col-sm-2">
-                                        <input id="valor" type="text" class="form-control" name="valor" value="<?php echo $array[0]['valor']; ?>">
-                                    </div>
-                                    <label for="categoria" class="col-sm-2 control-label">Categoria</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM categoria","categoria","idcategoria")?>
-                                    </div>
-                                    <label for="data" class="col-sm-2 control-label">Data</label>
-                                    <div class="col-sm-2">
-                                        <input class="form-control" type="date" name="data" value="<?php echo $array[0]['data']; ?>">
-                                    </div>
-                                    <label for="poder" class="col-sm-2 control-label">Poder</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM poder","poder","idpoder"); ?>
-                                    </div>
-                                    <label for="fonteR" class="col-sm-2 control-label">Fonte do Recurso</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM fonte_recurso","fonteR","idfonte_recurso")?>
-                                    </div>
-                                    <label for="fonte" class="col-sm-2 control-label">Fonte</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM fonte","fonte","idfonte")?>
-                                    </div>
-                                    <label for="aplicacao" class="col-sm-2 control-label">Aplicação</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM aplicacao","aplicacao","idaplicacao") ?>
-                                    </div>
-                                    <label for="AplicacaoV" class="col-sm-2 control-label">Aplicação variavel</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM aplicacao_variavel","AplicacaoV","idaplicacao_variavel")?>
-                                    </div>
-                                    <label for="rubrica" class="col-sm-2 control-label">Rubrica</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM rubrica","rubrica","idrubrica") ?>
-                                    </div>
-                                    <label for="alinea" class="col-sm-2 control-label">Alinea</label>
-                                    <div class="col-sm-2">
-                                        <?php $dbo->opButton("SELECT * FROM alinea","alinea","idalinea") ?>
-                                    </div>
-                                    <label   class="col-sm-2 control-label" for="ano_exe">Ano de exercício</label>
-                                    <div class="col-sm-2">
-                                        <input class="form-control" type="text" name="ano_exe" value="<?php echo $array[0]['ano_exe']; ?>">
-                                    </div>
-                                    <label  class="col-sm-2 control-label" for="mes_exe">Mês de exercício</label>
-                                    <div class="col-sm-2">
-                                        <input class="form-control" type="text" name="mes_exe" value="<?php echo $array[0]['mes_exe']; ?>">
-                                    </div>
-                                </div>
-                                <button type="input">Alterar</button>
-                            </form>
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col menu_fixed">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;"> <a href="index.html" class="site_title"><span>Portal</span></a></div>
+                        <!-- menu profile quick info -->
+                        <div class="profile clearfix">
+                            <div class="profile_pic"> <img src="../img/perfil1.jpg" alt="Perfil" class="img-circle profile_img"> </div>
+                            <div class="profile_info">
+                                <span>Bem vindo</span>
+                                <h2>Nome</h2>
+                            </div>
+                        </div>
+                        <!-- /menu profile quick info -->
+                        <br />
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3>Menu</h3>
+                                <ul class="nav side-menu">
+                                    <li><a href="../index.html"><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
+                                        <!--
+
+                                    -->
+                                    </li>
+                                    <li><a><i class="fa fa-money"></i>Receita</a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="receitaAd.php">Administração da tabela principal</a></li>
+                                            <li><a href="importacao/cadastroreceita.html">Importação de receita</a></li>
+                                            <li><a href="#">Dashboard3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="../despesa/despesa.php"><i class="fa fa-suitcase"></i>Despesas</a></li>
+                                    <li><a href="../licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle"> <a id="menu_toggle"><i class="fa fa-bars"></i></a> </div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal" aria-expanded="false"> <img src="../img/perfil1.jpg" alt="Perfil 1">Usuário</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div id="conteudo" class="right_col" role="main">
+                    <div id="result" class="row">
+                        <section class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h2>Alteração de receita</h2>
+                                    </div>
+
+                                    <form action="#" method="post" class="panel-body">
+                                        <div class="form-group">
+                                            <label for="fonteR" class="col-sm-6 control-label">Fonte do Recurso</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM fonte_recurso","fonteR","idfonte_recurso")?>
+                                            </div>
+                                            <label for="fonte" class="col-sm-6 control-label">Fonte</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM fonte","fonte","idfonte")?>
+                                            </div>
+                                            <label for="aplicacao" class="col-sm-6 control-label">Aplicação</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM aplicacao","aplicacao","idaplicacao") ?>
+                                            </div>
+                                            <label for="AplicacaoV" class="col-sm-6 control-label">Aplicação variavel</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM aplicacao_variavel","AplicacaoV","idaplicacao_variavel")?>
+                                            </div>
+                                            <label for="rubrica" class="col-sm-6 control-label">Rubrica</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM rubrica","rubrica","idrubrica") ?>
+                                            </div>
+                                            <label for="alinea" class="col-sm-6 control-label">Alinea</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM alinea","alinea","idalinea") ?>
+                                            </div>
+                                            <label for="poder" class="col-sm-6 control-label">Poder</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM poder","poder","idpoder"); ?>
+                                            </div>
+                                            <label for="categoria" class="col-sm-6 control-label">Categoria</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM categoria","categoria","idcategoria")?>
+                                            </div>
+                                            <label for="valor" class="col-sm-6 control-label">Valor</label>
+                                            <div class="col-sm-6">
+                                                <input id="valor" type="text" class="form-control" name="valor" value="<?php echo $array[0]['valor']; ?>">
+                                            </div>
+                                            <label for="data" class="col-sm-2 control-label">Data</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="date" name="data" value="<?php echo $array[0]['data']; ?>">
+                                            </div>
+                                            <label class="col-sm-2 control-label" for="ano_exe">Ano de exercício</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" name="ano_exe" value="<?php echo $array[0]['ano_exe']; ?>">
+                                            </div>
+                                            <label class="col-sm-2 control-label" for="mes_exe">Mês de exercício</label>
+                                            <div class="col-sm-2">
+                                                <input class="form-control" type="text" name="mes_exe" value="<?php echo $array[0]['mes_exe']; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-default" type="input">Alterar</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right"> Modelo Dashboard - Feito e administrado por <a href="#">Carvalho Multiserviços</a> </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
         </div>
+        <!-- jQuery -->
         <script src="../vendors/jquery/jquery-3.2.0.min.js"></script>
+        <!-- Bootstrap -->
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Custom -->
         <script src="../build/js/custom.js"></script>
     </body>
 
