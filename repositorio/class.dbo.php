@@ -107,17 +107,21 @@ class DBO{
     }
     #UPDATE
 
-    public function alteraRegistro($tabela, $id, $dados){
-        $UPDATE = "UPDATE ".$tabela." SET ";
-        foreach($dados as $campo => $valor){
-            $ups .= $campo." = '".$valor."',";
+    public function alteraRegistro($valor,$set,$id){
+        if(isset($_POST[$valor])){
+            $valor = $_POST[$valor];
+            $result=$this->query("UPDATE receita SET {$set} = '{$valor}' WHERE idreceita='{$id}';");
         }
-        $ups = substr($ups,0,-1);
-        $UPDATE .= $ups." WHERE ".$tabela."_id = ".$id;
-        return $this->query($UPDATE);
-        //return $id;
     }
-
+    public function opButton($sql,$name,$value){
+        $result = $this->query($sql);
+        echo "<select class='form-control' name='$name'>";
+        echo "<option></option>";
+        while($row = $result->fetch_assoc()) {
+            echo "<option value='".$row[$value]."'>$row[$value]</option>";
+        }
+        echo "</select>";
+    }
     #DELETE
     public function deletaRegistros($tabela,$id){
         $DELETE = "DELETE FROM ".$tabela." WHERE ".$tabela."_id = ".$id;
@@ -146,15 +150,19 @@ class DBO{
         return mysqli_insert_id($this->mysqli);
     }
     public function setReceita($dados) {
-        for($i = 0; $i < count($dados); $i++){
-            if($dados[$i][16]!=NULL){
-                $sql = "INSERT IGNORE INTO `subalinea` (`idsubalinea`) VALUES ('".$dados[$i][15]."');";
-                $this->query($sql);
-            }
-        }
+
+//        for($i = 0; $i < count($dados); $i++){
+//            if($dados[$i][16]!=NULL){
+//                $sql = "INSERT IGNORE INTO `subalinea` (`idsubalinea`) VALUES ('".$dados[$i][15]."');";
+//                $this->query($sql);
+//            }
+//        }
         $this->query($sql);
         for ($i = 0; $i < count($dados); $i++) {
+
             $sql = "INSERT IGNORE INTO `alinea` (`idalinea`, `subalinea_idsubalinea`) VALUES ('".$dados[$i][14]."','".$dados[$i][15]."');";
+            $this->query($sql);
+            $sql = "INSERT IGNORE INTO `subalinea` (`idsubalinea`) VALUES ('".$dados[$i][15]."');";
             $this->query($sql);
             $sql = "INSERT IGNORE INTO `poder` (`idpoder`) VALUES ('".$dados[$i][6]."');";
             $this->query($sql);
