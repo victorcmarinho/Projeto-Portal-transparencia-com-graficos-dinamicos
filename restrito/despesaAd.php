@@ -104,7 +104,7 @@ if(isset($_POST['excluir'])){
                                         <div id="table">
                                             <table id="TabelaAD" class="table table-striped table-bordered">
                                                 <h1>
-                                                    <caption>Receitas</caption>
+                                                    <caption>Despesa</caption>
                                                 </h1>
                                                 <thead>
                                                     <th>ID</th>

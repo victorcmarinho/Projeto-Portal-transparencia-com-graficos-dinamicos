@@ -15,17 +15,13 @@ if(isset($_POST)){
     if(isset($_POST['rubrica'])){if($_POST['rubrica'] != null)$dbo->alteraRegistro('rubrica','rubrica_idrubrica',$id);}
     if(isset($_POST['alinea'])){if($_POST['alinea'] != null)$dbo->alteraRegistro('alinea','alinea_idalinea',$id);}
 }
-if($result=$dbo->query("SELECT * FROM `receita` WHERE idreceita='{$id}'")){
+if($result=$dbo->query("SELECT * FROM `despesa` WHERE iddespesa='{$id}'")){
     if($result){
         while($row = $result->fetch_assoc()){
             $array[]=$row;
         }
     }
     $result->close();
-}
-if(isset($_POST['excluir'])){
-    $id = $_POST['excluir'];
-    $dbo->query("DELETE FROM receita WHERE idreceita='{$id}';");
 }
 ?>
     <!DOCTYPE html>
@@ -115,58 +111,62 @@ if(isset($_POST['excluir'])){
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h2>Alteração de receita</h2>
+                                        <h2>Alteração de despesa</h2>
                                     </div>
 
                                     <form action="#" method="post" class="panel-body">
                                         <div class="form-group">
-                                            <label for="fonteR" class="col-sm-6 control-label">Fonte do Recurso</label>
+                                            <label for="tipo" class="col-sm-6 control-label">Tipo da Despesa</label>
                                             <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM fonte_recurso","fonteR","idfonte_recurso")?>
+                                                <?php $dbo->opButton("SELECT * FROM tipo_despesa","tipo","idtipo_despesa")?>
                                             </div>
-                                            <label for="fonte" class="col-sm-6 control-label">Fonte</label>
+                                            <label for="numero" class="col-sm-6 control-label">Numero de empenho</label>
                                             <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM fonte","fonte","idfonte")?>
+                                                <?php $dbo->opButton("SELECT * FROM numero_empenho","numero","numero")?>
+                                            </div>
+                                            <label for="pessoa" class="col-sm-6 control-label">Pessoa</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM pessoas","pessoa","cpfcnpj") ?>
+                                            </div>
+                                            <label for="funcao" class="col-sm-6 control-label">Função</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM funcao","funcao","idfuncao")?>
+                                            </div>
+                                            <label for="programa" class="col-sm-6 control-label">Programa</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM programa","programa","idprograma") ?>
+                                            </div>
+                                            <label for="acao" class="col-sm-6 control-label">Ação</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM acao","acao","idacao") ?>
+                                            </div>
+                                            <label for="fonteR" class="col-sm-6 control-label">Fonte do recurso</label>
+                                            <div class="col-sm-6">
+                                                <?php $dbo->opButton("SELECT * FROM fonte_recurso","fonteR","idfonte_recurso"); ?>
                                             </div>
                                             <label for="aplicacao" class="col-sm-6 control-label">Aplicação</label>
                                             <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM aplicacao","aplicacao","idaplicacao") ?>
+                                                <?php $dbo->opButton("SELECT * FROM aplicacao","aplicacao","idaplicacao")?>
                                             </div>
-                                            <label for="AplicacaoV" class="col-sm-6 control-label">Aplicação variavel</label>
+                                            <label for="modalidade" class="col-sm-6 control-label">Modalidade</label>
                                             <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM aplicacao_variavel","AplicacaoV","idaplicacao_variavel")?>
+                                                <?php $dbo->opButton("SELECT * FROM modalidade","modalidade","idmodalidade")?>
                                             </div>
-                                            <label for="rubrica" class="col-sm-6 control-label">Rubrica</label>
+                                            <label for="elemento" class="col-sm-6 control-label">Elemento</label>
                                             <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM rubrica","rubrica","idrubrica") ?>
+                                                <?php $dbo->opButton("SELECT * FROM elemento","elemento","idelemento")?>
                                             </div>
-                                            <label for="alinea" class="col-sm-6 control-label">Alinea</label>
+                                            <label for="historico" class="col-sm-6 control-label">Histórico</label>
                                             <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM alinea","alinea","idalinea") ?>
-                                            </div>
-                                            <label for="poder" class="col-sm-6 control-label">Poder</label>
-                                            <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM poder","poder","idpoder"); ?>
-                                            </div>
-                                            <label for="categoria" class="col-sm-6 control-label">Categoria</label>
-                                            <div class="col-sm-6">
-                                                <?php $dbo->opButton("SELECT * FROM categoria","categoria","idcategoria")?>
+                                               <textarea id="historico" name="historico" class="form-control" rows="3" placeholder="<?php echo $array[0]['historico'];?>"></textarea>
                                             </div>
                                             <label for="valor" class="col-sm-6 control-label">Valor</label>
                                             <div class="col-sm-6">
                                                 <input id="valor" type="text" class="form-control" name="valor" value="<?php echo $array[0]['valor']; ?>">
                                             </div>
-                                            <label for="data" class="col-sm-2 control-label">Data</label>
-                                            <div class="col-sm-2">
+                                            <label for="data" class="col-sm-6 control-label">Data</label>
+                                            <div class="col-sm-6">
                                                 <input class="form-control" type="date" name="data" value="<?php echo $array[0]['data']; ?>">
-                                            </div>
-                                            <label class="col-sm-2 control-label" for="ano_exe">Ano de exercício</label>
-                                            <div class="col-sm-2">
-                                                <input class="form-control" type="text" name="ano_exe" value="<?php echo $array[0]['ano_exe']; ?>">
-                                            </div>
-                                            <label class="col-sm-2 control-label" for="mes_exe">Mês de exercício</label>
-                                            <div class="col-sm-2">
-                                                <input class="form-control" type="text" name="mes_exe" value="<?php echo $array[0]['mes_exe']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">

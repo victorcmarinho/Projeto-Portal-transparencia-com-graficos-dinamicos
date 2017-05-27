@@ -113,8 +113,6 @@ if(isset($_POST['excluir'])){
                                                     <th>Fonte do recurso</th>
                                                     <th>Rubrica</th>
                                                     <th>Alinea</th>
-                                                    <th>Ano</th>
-                                                    <th>Mês</th>
                                                     <th>Data</th>
                                                     <th>Valor</th>
                                                     <th>Opções de controle</th>
@@ -150,12 +148,6 @@ if(isset($_POST['excluir'])){
                                                         </td>
                                                         <td>
                                                             <?php echo $row['alinea_idalinea']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['ano_exe']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $row['mes_exe']; ?>
                                                         </td>
                                                         <td>
                                                             <?php echo date("d/m/Y", strtotime($row['data'])); ?>

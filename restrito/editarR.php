@@ -14,6 +14,7 @@ if(isset($_POST)){
     if(isset($_POST['AplicacaoV'])){if($_POST['AplicacaoV'] != null)$dbo->alteraRegistro('AplicacaoV','aplicacao_variavel_idaplicacao_variavel',$id);}
     if(isset($_POST['rubrica'])){if($_POST['rubrica'] != null)$dbo->alteraRegistro('rubrica','rubrica_idrubrica',$id);}
     if(isset($_POST['alinea'])){if($_POST['alinea'] != null)$dbo->alteraRegistro('alinea','alinea_idalinea',$id);}
+    header("location:receitaAd.php");
 }
 if($result=$dbo->query("SELECT * FROM `receita` WHERE idreceita='{$id}'")){
     if($result){
@@ -159,14 +160,6 @@ if(isset($_POST['excluir'])){
                                             <label for="data" class="col-sm-2 control-label">Data</label>
                                             <div class="col-sm-2">
                                                 <input class="form-control" type="date" name="data" value="<?php echo $array[0]['data']; ?>">
-                                            </div>
-                                            <label class="col-sm-2 control-label" for="ano_exe">Ano de exercício</label>
-                                            <div class="col-sm-2">
-                                                <input class="form-control" type="text" name="ano_exe" value="<?php echo $array[0]['ano_exe']; ?>">
-                                            </div>
-                                            <label class="col-sm-2 control-label" for="mes_exe">Mês de exercício</label>
-                                            <div class="col-sm-2">
-                                                <input class="form-control" type="text" name="mes_exe" value="<?php echo $array[0]['mes_exe']; ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">

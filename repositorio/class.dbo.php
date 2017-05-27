@@ -113,6 +113,12 @@ class DBO{
             $result=$this->query("UPDATE receita SET {$set} = '{$valor}' WHERE idreceita='{$id}';");
         }
     }
+    public function alteraRegistroD($valor,$set,$id){
+        if(isset($_POST[$valor])){
+            $valor = $_POST[$valor];
+            $result=$this->query("UPDATE despesa SET {$set} = '{$valor}' WHERE iddespesa='{$id}';");
+        }
+    }
     public function opButton($sql,$name,$value){
         $result = $this->query($sql);
         echo "<select class='form-control' name='$name'>";
