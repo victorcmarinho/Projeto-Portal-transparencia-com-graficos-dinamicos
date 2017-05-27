@@ -67,7 +67,13 @@ if(isset($_POST['excluir'])){
                                             <li><a href="#">Dashboard3</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="../despesa/despesa.php"><i class="fa fa-suitcase"></i>Despesas</a></li>
+                                    <li><a ><i class="fa fa-suitcase"></i>Despesas</a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="despesaAd.php">Administração da tabela principal</a></li>
+                                            <li><a href="importacao/cadastrodespesa.html">Importação de despesa</a></li>
+                                            <li><a href="#">Dashboard3</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="../licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
                                 </ul>
                             </div>

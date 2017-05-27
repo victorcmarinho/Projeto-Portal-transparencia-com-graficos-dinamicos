@@ -14,7 +14,6 @@ if(isset($_POST)){
     if(isset($_POST['AplicacaoV'])){if($_POST['AplicacaoV'] != null)$dbo->alteraRegistro('AplicacaoV','aplicacao_variavel_idaplicacao_variavel',$id);}
     if(isset($_POST['rubrica'])){if($_POST['rubrica'] != null)$dbo->alteraRegistro('rubrica','rubrica_idrubrica',$id);}
     if(isset($_POST['alinea'])){if($_POST['alinea'] != null)$dbo->alteraRegistro('alinea','alinea_idalinea',$id);}
-    header("location:receitaAd.php");
 }
 if($result=$dbo->query("SELECT * FROM `receita` WHERE idreceita='{$id}'")){
     if($result){

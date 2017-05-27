@@ -2,18 +2,20 @@
 include('../repositorio/Master.php');
 $id = (int) $_GET['id'];
 if(isset($_POST)){
-    if(isset($_POST['valor'])){$dbo->alteraRegistro('valor','valor',$id);}
-    if(isset($_POST['data'])){$dbo->alteraRegistro('data','data',$id);}
-    if(isset($_POST['ano_exe'])){$dbo->alteraRegistro('ano_exe','ano_exe',$id);}
-    if(isset($_POST['mes_exe'])){$dbo->alteraRegistro('mes_exe','mes_exe',$id);}
-    if(isset($_POST['categoria'])){if($_POST['categoria'] != null)$dbo->alteraRegistro('categoria','categoria_idcategoria',$id);}
-    if(isset($_POST['poder'])){if($_POST['poder'] != null)$dbo->alteraRegistro('poder','poder_idpoder',$id);}
-    if(isset($_POST['fonteR'])){if($_POST['fonteR'] != null)$dbo->alteraRegistro('fonteR','fonte_recurso_idfonte_recurso',$id);}
-    if(isset($_POST['fonte'])){if($_POST['fonte'] != null)$dbo->alteraRegistro('fonte','fonte_idfonte',$id);}
-    if(isset($_POST['aplicacao'])){if($_POST['aplicacao'] != null)$dbo->alteraRegistro('aplicacao','aplicacao_idaplicacao',$id);}
-    if(isset($_POST['AplicacaoV'])){if($_POST['AplicacaoV'] != null)$dbo->alteraRegistro('AplicacaoV','aplicacao_variavel_idaplicacao_variavel',$id);}
-    if(isset($_POST['rubrica'])){if($_POST['rubrica'] != null)$dbo->alteraRegistro('rubrica','rubrica_idrubrica',$id);}
-    if(isset($_POST['alinea'])){if($_POST['alinea'] != null)$dbo->alteraRegistro('alinea','alinea_idalinea',$id);}
+    if(isset($_POST['valor'])){$dbo->alteraRegistroD('valor','valor',$id);}
+    if(isset($_POST['data'])){$dbo->alteraRegistroD('data','data',$id);}
+    if(isset($_POST['historico'])){$dbo->alteraRegistroD('historico','historico',$id);}
+    if(isset($_POST['tipo'])){if($_POST['tipo'] != null)$dbo->alteraRegistroD('tipo','tipo_despesa_idtipo_despesa',$id);}
+    if(isset($_POST['numero'])){if($_POST['numero'] != null)$dbo->alteraRegistroD('numero','numero_empenho_numero',$id);}
+    if(isset($_POST['pessoa'])){if($_POST['pessoa'] != null)$dbo->alteraRegistroD('pessoa','pessoas_cpfcnpj',$id);}
+    if(isset($_POST['fonte'])){if($_POST['fonte'] != null)$dbo->alteraRegistroD('fonte','fonte_idfonte',$id);}
+    if(isset($_POST['funcao'])){if($_POST['funcao'] != null)$dbo->alteraRegistroD('funcao','funcao_idfuncao',$id);}
+    if(isset($_POST['programa'])){if($_POST['programa'] != null)$dbo->alteraRegistroD('programa','programa_idprograma',$id);}
+    if(isset($_POST['acao'])){if($_POST['acao'] != null)$dbo->alteraRegistroD('acao','acao_idacao',$id);}
+    if(isset($_POST['fonteR'])){if($_POST['fonteR'] != null)$dbo->alteraRegistroD('fonteR','fonte_recurso_idfonte_recurso',$id);}
+    if(isset($_POST['aplicacao'])){if($_POST['aplicacao'] != null)$dbo->alteraRegistroD('aplicacao','aplicacao_idaplicacao',$id);}
+    if(isset($_POST['modalidade'])){if($_POST['modalidade'] != null)$dbo->alteraRegistroD('modalidade','modalidade_idmodalidade',$id);}
+    if(isset($_POST['elemento'])){if($_POST['elemento'] != null)$dbo->alteraRegistroD('elemento','elemento_idelemento',$id);}
 }
 if($result=$dbo->query("SELECT * FROM `despesa` WHERE iddespesa='{$id}'")){
     if($result){
