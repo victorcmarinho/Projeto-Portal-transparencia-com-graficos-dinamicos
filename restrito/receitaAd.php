@@ -156,10 +156,10 @@ if(isset($_POST['excluir'])){
                                                         </td>
                                                         <td>
                                                             <a href="editarR.php?id=<?php echo $row['idreceita']; ?>">
-                                                                <button type="button" class="btn btn-warning glyphicon glyphicon-pencil"></button>
+                                                                <button type="button" name="editar" class="btn btn-warning glyphicon glyphicon-pencil"></button>
                                                             </a>
                                                             <form action="#" method="post">
-                                                                <button type="submit" class="btn btn-danger glyphicon glyphicon-remove">Excluir</button>
+                                                                <button type="submit" name="excluir" class="btn btn-danger glyphicon glyphicon-remove"></button>
                                                                 <input type="hidden" name="excluir" value="<?php echo $row['idreceita']; ?>">
                                                             </form>
                                                         </td>
