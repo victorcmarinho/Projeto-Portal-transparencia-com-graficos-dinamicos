@@ -1,6 +1,5 @@
 $("document").ready(function () {
     $("#TabelaAD").DataTable({
-        "scrollX": true,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -22,11 +21,10 @@ $("document").ready(function () {
             "oAria": {
                 "sSortAscending": ": Ordenar colunas de forma ascendente",
                 "sSortDescending": ": Ordenar colunas de forma descendente"
-            }
+            },
         },
 
     });
-    $('#TabelaAD').removeClass('display').addClass('table table-striped table-bordered');
     $('#load').addClass('load');
     $('#result').removeClass('load');
 });

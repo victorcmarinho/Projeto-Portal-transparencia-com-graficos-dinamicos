@@ -227,6 +227,5 @@ class DBO{
             $this->query($sql);
         }
     }
-
 }
 ?>

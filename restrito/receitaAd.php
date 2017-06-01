@@ -21,16 +21,14 @@ if(isset($_POST['excluir'])){
         <meta property="og:image" content="#">
         <link rel="icon" href="#" sizes="32x32">
         <title>Administração de Receita</title>
-        <!-- Bootstrap -->
         <link href="../vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
         <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <!-- Custom Theme Style -->
         <link href="../build/css/custom.css" rel="stylesheet">
         <link href="../build/css/login.css" rel="stylesheet">
         <link href="../build/css/animate.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/datatables.min.css">
         <link rel="stylesheet" type="text/css" href="../build/css/load.css">
+
+        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/datatables.min.css">
 
     </head>
 
@@ -48,26 +46,21 @@ if(isset($_POST['excluir'])){
                                 <h2>Nome</h2>
                             </div>
                         </div>
-                        <!-- /menu profile quick info -->
-                        <br />
-                        <!-- sidebar menu -->
+                        <br/>
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <h3>Menu</h3>
                                 <ul class="nav side-menu">
                                     <li><a href="../index.html"><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
-                                        <!--
-
-                                    -->
                                     </li>
-                                    <li><a ><i class="fa fa-money"></i>Receita</a>
+                                    <li><a><i class="fa fa-money"></i>Receita</a>
                                         <ul class="nav child_menu">
                                             <li><a href="receitaAd.php">Administração da tabela principal</a></li>
                                             <li><a href="importacao/cadastroreceita.html">Importação de receita</a></li>
                                             <li><a href="#">Dashboard3</a></li>
                                         </ul>
                                     </li>
-                                    <li><a ><i class="fa fa-suitcase"></i>Despesas</a>
+                                    <li><a><i class="fa fa-suitcase"></i>Despesas</a>
                                         <ul class="nav child_menu">
                                             <li><a href="despesaAd.php">Administração da tabela principal</a></li>
                                             <li><a href="importacao/cadastrodespesa.html">Importação de despesa</a></li>
@@ -163,10 +156,10 @@ if(isset($_POST['excluir'])){
                                                         </td>
                                                         <td>
                                                             <a href="editarR.php?id=<?php echo $row['idreceita']; ?>">
-                                                                <button type="button" class="btn btn-warning">Editar</button>
+                                                                <button type="button" class="btn btn-warning glyphicon glyphicon-pencil"></button>
                                                             </a>
                                                             <form action="#" method="post">
-                                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                                                <button type="submit" class="btn btn-danger glyphicon glyphicon-remove">Excluir</button>
                                                                 <input type="hidden" name="excluir" value="<?php echo $row['idreceita']; ?>">
                                                             </form>
                                                         </td>
@@ -186,19 +179,13 @@ if(isset($_POST['excluir'])){
                     </div>
                 </div>
             </div>
-            <!-- /page content -->
-            <!-- footer content -->
             <footer>
                 <div class="pull-right"> Modelo Dashboard - Feito e administrado por <a href="#">Carvalho Multiserviços</a> </div>
                 <div class="clearfix"></div>
             </footer>
-            <!-- /footer content -->
         </div>
-        <!-- jQuery -->
         <script src="../vendors/jquery/jquery-3.2.0.min.js"></script>
-        <!-- Bootstrap -->
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-        <!-- Custom -->
         <script src="../build/js/custom.js"></script>
         <script type="text/javascript" src="../vendors/DataTable/datatables.min.js"></script>
         <script src="tabela.js" type="text/javascript"></script>
