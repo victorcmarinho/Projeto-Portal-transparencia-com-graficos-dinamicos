@@ -27,8 +27,9 @@ if(isset($_POST['excluir'])){
         <link href="../build/css/login.css" rel="stylesheet">
         <link href="../build/css/animate.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../build/css/load.css">
-
-        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/datatables.min.css">
+        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/CSS/datatables.min.css">
+        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/CSS/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/CSS/responsive.bootstrap.min.css">
 
     </head>
 
@@ -99,9 +100,6 @@ if(isset($_POST['excluir'])){
                                     <div class="tab-content">
                                         <div id="table">
                                             <table id="TabelaAD" class="table table-striped table-bordered">
-                                                <h1>
-                                                    <caption>Receitas</caption>
-                                                </h1>
                                                 <thead>
                                                     <th>ID</th>
                                                     <th>Aplicação</th>
@@ -184,10 +182,13 @@ if(isset($_POST['excluir'])){
                 <div class="clearfix"></div>
             </footer>
         </div>
-        <script src="../vendors/jquery/jquery-3.2.0.min.js"></script>
+        <script src="../vendors/jquery/jquery-1.12.4.js"></script>
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
         <script src="../build/js/custom.js"></script>
-        <script type="text/javascript" src="../vendors/DataTable/datatables.min.js"></script>
+        <script type="text/javascript" src="../vendors/DataTable/JS/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="../vendors/DataTable/JS/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="../vendors/DataTable/JS/dataTables.responsive.min.js"></script>
+        <script type="text/javascript" src="../vendors/DataTable/JS/responsive.bootstrap.min.js"></script>
         <script src="tabela.js" type="text/javascript"></script>
     </body>
 

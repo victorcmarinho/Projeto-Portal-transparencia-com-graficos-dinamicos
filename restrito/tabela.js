@@ -1,5 +1,10 @@
 $("document").ready(function () {
     $("#TabelaAD").DataTable({
+        scrollY: 400,
+        scrollX: true,
+        scrollCollapse: true,
+        deferRender: true,
+        scroller: true,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
