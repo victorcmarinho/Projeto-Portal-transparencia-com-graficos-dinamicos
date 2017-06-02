@@ -27,7 +27,7 @@ include_once "../repositorio/Master.php";
         <link href="../build/css/login.css" rel="stylesheet">
         <link href="../build/css/animate.css" rel="stylesheet">
         <link href="../vendors/jquery/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/datatables.min.css">
+        <link rel="stylesheet" type="text/css" href="../vendors/DataTable/css/datatables.min.css">
         <link rel="stylesheet" href="../build/css/load.css">
 
     </head>
@@ -54,13 +54,6 @@ include_once "../repositorio/Master.php";
                                 <h3>Menu</h3>
                                 <ul class="nav side-menu">
                                     <li><a href="../index.html"><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
-                                        <!--
-                                    <ul class="nav child_menu">
-                                        <li><a href="#">Dashboard</a></li>
-                                        <li><a href="#">Dashboard2</a></li>
-                                        <li><a href="#">Dashboard3</a></li>
-                                    </ul>
-                                    -->
                                     </li>
                                     <li><a href="../receita/receita.php"><i class="fa fa-money"></i>Receita</a></li>
                                     <li><a href="despesa.php"><i class="fa fa-suitcase"></i>Despesas</a></li>
@@ -68,10 +61,8 @@ include_once "../repositorio/Master.php";
                                 </ul>
                             </div>
                         </div>
-                        <!-- /sidebar menu -->
                     </div>
                 </div>
-                <!-- top navigation -->
                 <div class="top_nav">
                     <div class="nav_menu">
                         <nav>
@@ -84,8 +75,6 @@ include_once "../repositorio/Master.php";
                         </nav>
                     </div>
                 </div>
-                <!-- /top navigation -->
-                <!-- page content -->
                 <div id="conteudo" class="right_col" role="main">
                     <!-- top tiles -->
                     <!-- Banner
@@ -218,25 +207,17 @@ include_once "../repositorio/Master.php";
                             </div>
                         </form>
                     </div>
-                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal -->
         </div>
-        <!-- jQuery -->
         <script src="../vendors/jquery/jquery-3.2.0.min.js"></script>
-
-        <script src="../vendors/jquery/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-        <!-- Bootstrap -->
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-        <!-- Custom -->
         <script src="../build/js/custom.js"></script>
         <script src="../vendors/HighCharts/highstock.js"></script>
         <script src="../vendors/HighCharts/highcharts.js"></script>
         <script src="../vendors/HighCharts/exporting.js"></script>
         <script src="despesa.js" type="text/javascript"></script>
-        <script type="text/javascript" src="../vendors/DataTable/datatables.min.js"></script>
+        <script type="text/javascript" src="../vendors/DataTable/js/datatables.min.js"></script>
     </body>
 
     </html>

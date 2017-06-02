@@ -236,7 +236,22 @@ class DBO{
         $i=0;
         foreach ($data as $key) {
             $data[$i]['data'] = date("d/m/Y", strtotime($data[$i]['data']));
-            $data[$i]['button'] = "<a  href='editarR.php?id=".$data[$i][$id]."'><button class='btn btn-warning glyphicon glyphicon-pencil ' type='submit' name='editar' value='".$data[$i][$id]."'data-toggle='modal' data-target='#mEditar'></button></a> <form action'#' method='post'> <button type='submit' name='excluir' class='btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' data-target='#Excluir'></button>  <input type='hidden' name='excluir' value='".$data[$i]['idreceita']."'></form>";
+            $data[$i]['button'] = "<a  href='editarR.php?id=".$data[$i][$id]."'><button class='btn btn-warning glyphicon glyphicon-pencil ' type='submit' name='editar' value='".$data[$i][$id]."'data-toggle='modal' data-target='#mEditar'></button></a> <form action'#' method='post'> <button type='submit' name='excluir' class='btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' data-target='#Excluir'></button>  <input type='hidden' name='excluir' value='".$data[$i][$id]."'></form>";
+            $i++;
+        }
+        $datax = array('data' => $data);
+        echo json_encode($datax,JSON_UNESCAPED_UNICODE);
+    }
+    public function tabelaD($query,$id){
+        $query=$this->query($query);
+        $data=array();
+        while($result = $query->fetch_assoc()){
+            $data[]=$result;
+        }
+        $i=0;
+        foreach ($data as $key) {
+            $data[$i]['data'] = date("d/m/Y", strtotime($data[$i]['data']));
+            $data[$i]['button'] = "<a  href='editarD.php?id=".$data[$i][$id]."'><button class='btn btn-warning glyphicon glyphicon-pencil ' type='submit' name='editar' value='".$data[$i][$id]."'data-toggle='modal' data-target='#mEditar'></button></a> <form action'#' method='post'> <button type='submit' name='excluir' class='btn btn-danger glyphicon glyphicon-remove' data-toggle='modal' data-target='#Excluir'></button>  <input type='hidden' name='excluir' value='".$data[$i][$id]."'></form>";
             $i++;
         }
         $datax = array('data' => $data);

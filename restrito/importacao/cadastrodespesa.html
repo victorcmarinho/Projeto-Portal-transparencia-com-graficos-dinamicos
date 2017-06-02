@@ -43,20 +43,20 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
                                 </li>
-                                <li><a ><i class="fa fa-money"></i>Receita</a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="../receitaAd.php">Administração da tabela principal</a></li>
-                                            <li><a href="cadastroreceita.html">Importação de receita</a></li>
-                                            <li><a href="#">Dashboard3</a></li>
-                                        </ul>
-                                    </li>
-                                <li><a ><i class="fa fa-suitcase"></i>Despesas</a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="../despesaAd.php">Administração da tabela principal</a></li>
-                                            <li><a href="cadastrodespesa.html">Importação de despesa</a></li>
-                                            <li><a href="#">Dashboard3</a></li>
-                                        </ul>
-                                    </li>
+                                <li><a><i class="fa fa-money"></i>Receita</a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="../receitaAd.php">Administração da tabela principal</a></li>
+                                        <li><a href="cadastroreceita.html">Importação de receita</a></li>
+                                        <li><a href="#">Dashboard3</a></li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-suitcase"></i>Despesas</a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="../despesaAd.php">Administração da tabela principal</a></li>
+                                        <li><a href="cadastrodespesa.html">Importação de despesa</a></li>
+                                        <li><a href="#">Dashboard3</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="../licitacaoAd.html"><i class="fa fa-suitcase"></i>Licitação</a></li>
                                 <li><a href="../cadastro/cadastro.html"><i class="fa fa-group"></i>Cadastro de usuários</a></li>
                                 <li><a href="../cadastro/formularioCadastro.js"><i class="fa fa-list-alt"></i>Lista de usuários</a></li>
@@ -98,13 +98,25 @@
                                             <textarea id="desc" name="descricao" class="form-control" rows="3"></textarea>
                                         </div>
                                         <div class="form-group">
+                                            <div class="col-md-6">
+                                                <label for="tipo">Selecione o tipo de separação do arquivo</label>
+                                                <select id="tipo" class="form-control">
+                                                    <option value=";">;</option>
+                                                    <option value="/t">TAB</option>
+                                                    <option value="|">|</option>
+                                                    <option value=",">,</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
                                             <label for="dropzone">Arraste ou selecione o arquivo que deseja importar</label>
                                             <span class=" form-control fileUpload btn btn-default">
                                                     <span class="glyphicon glyphicon-upload"></span> Upload de arquivo
                                             <input class="form-control" id="uploadFile" type="file" name="arquivo" accept=".csv">
                                             </span>
+                                            <input data-toggle="modal" data-target="#status" aria-expanded="false" id="enviar" class="btn btn-default" type="submit" value="Enviar">
                                         </div>
-                                        <input data-toggle="modal" data-target="#status" aria-expanded="false" id="enviar" class="btn btn-default" type="submit" value="Enviar">
+
                                     </form>
                                 </div>
                             </div>
@@ -125,7 +137,7 @@
                                 </script>
                                 <div id="status" class="modal fade bs-example-modal-sm center" tabindex="-1" role="dialog" aria-labelledby="LoadLabel">
                                     <div class="modal-dialog modal-sm center" role="document">
-                                        <img  src='../../img/ring-alt.svg' alt='Enviando' />
+                                        <img src='../../img/ring-alt.svg' alt='Enviando' />
                                     </div>
                                 </div>
                             </div>
@@ -180,12 +192,12 @@
     <script src="../../build/js/custom.js"></script>
     <script type="text/javascript" language="javascript">
         /*
-                        $(function($) {
-                            $("#enviar").click(function() {
-                                $("#status").html("<img src='../img/ring-alt.svg' alt='Enviando' />");
-                            });
-                        });
-                */
+                                                                        $(function($) {
+                                                                            $("#enviar").click(function() {
+                                                                                $("#status").html("<img src='../img/ring-alt.svg' alt='Enviando' />");
+                                                                            });
+                                                                        });
+                                                                */
 
     </script>
 
