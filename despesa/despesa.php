@@ -53,7 +53,7 @@ include_once "../repositorio/Master.php";
                             <div class="menu_section">
                                 <h3>Menu</h3>
                                 <ul class="nav side-menu">
-                                    <li><a href="../index.html"><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
+                                    <li><a href="../index.php"><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
                                     </li>
                                     <li><a href="../receita/receita.php"><i class="fa fa-money"></i>Receita</a></li>
                                     <li><a href="despesa.php"><i class="fa fa-suitcase"></i>Despesas</a></li>

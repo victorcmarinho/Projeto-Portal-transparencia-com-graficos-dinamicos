@@ -257,5 +257,6 @@ class DBO{
         $datax = array('data' => $data);
         echo json_encode($datax,JSON_UNESCAPED_UNICODE);
     }
+
 }
 ?>
