@@ -258,7 +258,7 @@ class DBO{
         echo json_encode($datax,JSON_UNESCAPED_UNICODE);
     }
     public function getUsuario($email,$senha){
-        $stmt =$this->mysqli->prepare("SELECT id,email,senha,ativo FROM `usuarios` WHERE email=? and senha=? LIMIT 1");
+        $stmt =$this->mysqli->prepare("SELECT id,nome,email,senha,nivel,ativo FROM `usuarios` WHERE email=? and senha=? LIMIT 1");
         return $stmt;
     }
 }
