@@ -1,28 +1,32 @@
 <?php
+include_once "repositorio/master.php";
 session_start();
-$usuariot = $_POST['email'];
-$senhat = $_POST['senha'];
-include_once("repostitorio/master.php");
-$result= $dbo->query("SELECT * FROM usuarios WHERE login='$usuariot' AND senha='$senhat' LIMIT 1");
-$resultado = mysqli_fetch_assoc($result);
-//echo "Usuario: ".$resultado['nome'];
-if(empty($resultado)){
-	//Mensagem de Erro
-	$_SESSION['loginErro'] = "Usuário ou senha Inválido";
-	//Manda o usuario para a tela de login
-	header("Location: login.php");
-}else{
-   	//Define os valores atribuidos na sessao do usuario
-	$_SESSION['usuarioId'] 			= $resultado['id'];
-	$_SESSION['usuarioNome'] 		= $resultado['nome'];
-	$_SESSION['usuarioNivelAcesso'] = $resultado['nivel_acesso_id'];
-	$_SESSION['usuarioLogin'] 		= $resultado['login'];
-	$_SESSION['usuarioSenha'] 		= $resultado['senha'];
+$email =  preg_replace('/[^[]_]/', '',$_POST['email']);
+$senha =  preg_replace('/[^[:alnum:]_]/', '',$_POST['senha']);
+$stmt=$dbo->getUsuario($email,$senha);
+$stmt->bind_param('ss',$email,$senha);
+$stmt->execute();
+$stmt->bind_result($id, $uemail, $usenha, $uativo);
+$stmt->store_result();
+echo $location=$_SESSION['location'];
+if($stmt->num_rows == 1){
+    if($stmt->fetch()){
+        if ($uativo == '0') {
 
-	if($_SESSION['usuarioNivelAcesso'] == 1){
-		header("Location: administrativo.php");
-	}else{
-		header("Location: usuario.php");
-	}
+            $_SESSION['loginErro']='<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p class="text-center"><strong>Atenção!</strong> Seu acesso foi desativado!</p></div>';
+            header("Location:$location");
+            exit();
+        }else{
+            $_SESSION['id'] = $id;
+            $_SESSION['email'] = $uemail;
+            $_SESSION['senha'] = $usenha;
+            header("Location:restrito/home.php");
+            exit();
+        }
+    }
+}else{
+    $_SESSION['loginErro']='<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p class="text-center"><strong>Atenção!</strong> Email ou Senha errados!</p></div>';
+     header("Location:$location");
 }
+
 ?>

@@ -1,6 +1,7 @@
 <?php
 include_once "../repositorio/Master.php";
-
+session_start();
+$_SESSION['location']='licitacao/licitacao.php';
 ?>
     <!DOCTYPE html>
     <html lang="PT-BR">
@@ -32,6 +33,13 @@ include_once "../repositorio/Master.php";
     </head>
 
     <body class="nav-md">
+       <?php
+		unset($_SESSION['usuarioId'],
+		      $_SESSION['usuarioNome'],
+		      $_SESSION['usuarioNivel'],
+		      $_SESSION['usuarioEmail'],
+		      $_SESSION['usuarioSenha']);
+	?>
         <div class="container body">
             <div class="main_container">
                 <div class="col-md-3 left_col menu_fixed">
@@ -86,6 +94,12 @@ include_once "../repositorio/Master.php";
                 <!-- /top navigation -->
                 <!-- page content -->
                 <div id="conteudo" class="right_col" role="main">
+                   <?php
+                            if(isset($_SESSION['loginErro'])){
+                                echo $_SESSION['loginErro'];
+                                unset($_SESSION['loginErro']);
+                            }
+                        ?>
                     <!-- top tiles -->
                     <!-- Banner
                 <div class="row tile_count">
@@ -174,7 +188,7 @@ include_once "../repositorio/Master.php";
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
-                        <form name="loginform" method="post" action="logar.php">
+                        <form name="loginform" method="post" action="../logar.php">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">Entre com os seus dados</h4>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['location']='index.php';
 ?>
 <!DOCTYPE html>
 <html lang="PT-BR">
@@ -74,14 +75,15 @@ session_start();
                     </div>
                 </div>
                 <div class="right_col" role="main">
-                    <p class="text-center text-danger">
+
+
                         <?php
-				                        if(isset($_SESSION['loginErro'])){
-					                       echo $_SESSION['loginErro'];
-					                       unset($_SESSION['loginErro']);
-				                        }
-                                    ?>
-                    </p>
+                            if(isset($_SESSION['loginErro'])){
+                                echo $_SESSION['loginErro'];
+                                unset($_SESSION['loginErro']);
+                            }
+                        ?>
+
                     <!-- top tiles -->
                     <!-- Banner
                 <div class="row tile_count">
@@ -98,13 +100,13 @@ session_start();
                                 </ol>
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img width="1200" height="320" src="img/slide1.jpg" alt="...">
+                                        <img width="1200" height="320" src="img/teclado.jpg" alt="...">
                                         <div class="carousel-caption">
                                             ...
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <img src="img/slide2.jpg" alt="...">
+                                        <img src="img/teclado.jpg" alt="...">
                                         <div class="carousel-caption">
                                             ...
                                         </div>
