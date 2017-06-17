@@ -1,3 +1,6 @@
+<?php
+include "../fprotect.php";
+?>
 <!DOCTYPE html>
 <html lang="PT-BR">
 

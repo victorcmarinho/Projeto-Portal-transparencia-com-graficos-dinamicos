@@ -1,4 +1,5 @@
 <?php
+include "../fprotect.php";
 include_once "../../repositorio/Master.php";
 if(isset($_POST['excluir'])){
     $id = $_POST['excluir'];

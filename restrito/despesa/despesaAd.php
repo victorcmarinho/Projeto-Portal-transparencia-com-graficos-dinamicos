@@ -1,9 +1,11 @@
 <?php
+include "../fprotect.php";
 include_once "../../repositorio/Master.php";
 if(isset($_POST['excluir'])){
     $id = $_POST['excluir'];
     $dbo->query("DELETE FROM despesa WHERE iddespesa='{$id}';");
 }
+
 ?>
     <!DOCTYPE html>
     <html lang="PT-BR">
