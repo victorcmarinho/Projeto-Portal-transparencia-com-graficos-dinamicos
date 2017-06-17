@@ -22,6 +22,9 @@ include "../protect.php";
         <link href="../../build/css/login.css" rel="stylesheet">
         <link href="../../vendors/SmartWizard-master/css/smart_wizard.css" rel="stylesheet" type="text/css" />
         <link href="../../vendors/SmartWizard-master/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="../../vendors/DataTable/CSS/datatables.min.css">
+        <link rel="stylesheet" type="text/css" href="../../vendors/DataTable/CSS/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../vendors/DataTable/CSS/responsive.bootstrap.min.css">
     </head>
 
     <body class="nav-md">
@@ -102,6 +105,10 @@ include "../protect.php";
                             </div>
                         </div>
                     </div>
+                    <footer>
+                        <div class="pull-right"> Modelo Dashboard - Feito por <a href="#">.....</a> </div>
+                        <div class="clearfix"></div>
+                    </footer>
                 </div>
             </div>
 
@@ -151,19 +158,30 @@ include "../protect.php";
                                         <!-- here the text will apper  -->
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="editAddress" class="col-sm-2 control-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="editAddress" name="editEmail" placeholder="Edite seu email aqui">
+                                        <input type="text" class="form-control" id="editEmail" name="editEmail" placeholder="Edite seu email aqui">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="editActive" class="col-sm-2 control-label">Ativação/Desativação</label>
+                                    <label for="editActive" class="col-sm-2 control-label">Ativação</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="editActive" id="editActive">
 			      	                        <option value="">---------</option>
 			      	                        <option value="1">Ativar</option>
 			      	                        <option value="0">Desativar</option>
+			                              </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editNivel" class="col-sm-2 control-label">Promover</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="editNivel" id="editNivel">
+			      	                        <option value="">---------</option>
+			      	                        <option value="1">Administrador</option>
+			      	                        <option value="0">Funcinário</option>
 			                              </select>
                                     </div>
                                 </div>
@@ -282,14 +300,11 @@ include "../protect.php";
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /Modal de adição de usuários -->
+
         </div>
-        <footer>
-            <div class="pull-right"> Modelo Dashboard - Feito por <a href="#">..........</a> </div>
-            <div class="clearfix"></div>
-        </footer>
+
         <div class="container">
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
@@ -314,6 +329,11 @@ include "../protect.php";
         <script src="../../vendors/Validator/validator.min.js"></script>
         <script type="text/javascript" src="../../vendors/SmartWizard-master/js/jquery.smartWizard.min.js"></script>
         <script type="text/javascript" src="formularioCadastro.js"></script>
+        <script type="text/javascript" src="../../vendors/DataTable/JS/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="../../vendors/DataTable/JS/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../vendors/DataTable/JS/dataTables.responsive.min.js"></script>
+        <script type="text/javascript" src="../../vendors/DataTable/JS/responsive.bootstrap.min.js"></script>
+        <script type="text/javascript" src="usuario.js"></script>
     </body>
 
     </html>

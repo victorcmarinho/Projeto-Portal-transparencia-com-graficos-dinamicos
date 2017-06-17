@@ -1,161 +1,178 @@
-// global the manage memeber table
+
 var manageMemberTable;
 
-$(document).ready(function() {
-	manageMemberTable = $("#manageMemberTable").DataTable({
-		"ajax": "php_action/retrieve.php",
-		"order": []
-	});
+$(document).ready(function () {
+    manageMemberTable = $("#usuarioTable").DataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            },
+        },
+        "ajax": "php_action/retrieve.php",
+        "order": []
+    });
 
+});
 
 function removeMember(id = null) {
-	if(id) {
-		// Click em remover
-		$("#removeBtn").unbind('click').bind('click', function() {
-			$.ajax({
-				url: 'php_action/remove.php',
-				type: 'post',
-				data: {member_id : id},
-				dataType: 'json',
-				success:function(response) {
-					if(response.success == true) {
-						$(".removeMessages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
-							  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-							  '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
-							'</div>');
+    if (id) {
+        // click on remove button
+        $("#removeBtn").unbind('click').bind('click', function () {
+            $.ajax({
+                url: 'php_action/remove.php',
+                type: 'post',
+                data: {
+                    member_id: id
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        $(".removeMessages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                            '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
+                            '</div>');
 
-						// recerrega a tabela
-						manageMemberTable.ajax.reload(null, false);
+                        manageMemberTable.ajax.reload(null, false);
 
-						// fecha modal
-						$("#removeMemberModal").modal('hide');
+                        $("#removeMemberModal").modal('hide');
 
-					} else {
-						$(".removeMessages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
-							  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-							  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
-							'</div>');
-					}
-				}
-			});
-		}); // Click em cancelar
-	} else {
-		alert('Error: Recarregue a pagina (F5)');
-	}
+                    } else {
+                        $(".removeMessages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                            '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
+                            '</div>');
+                    }
+                }
+            });
+        }); // click remove btn
+    } else {
+        alert('Error: Recarregue a página e tente novamente!');
+    }
 }
 
 function editMember(id = null) {
-	if(id) {
+    if (id) {
 
-		// remove o erro
-		$(".form-group").removeClass('has-error').removeClass('has-success');
-		$(".text-danger").remove();
-		// Mensagem
-		$(".edit-messages").html("");
+        $(".form-group").removeClass('has-error').removeClass('has-success');
+        $(".text-danger").remove();
+        $(".edit-messages").html("");
+        $("#member_id").remove();
+        $.ajax({
+            url: 'php_action/getSelectedMember.php',
+            type: 'post',
+            data: {
+                member_id: id
+            },
+            dataType: 'json',
+            success: function (response) {
+                $("#editName").val(response.name);
 
-		// remove id
-		$("#member_id").remove();
+                $("#editEmail").val(response.email);
 
-		// associa os membros
-		$.ajax({
-			url: 'php_action/getSelectedMember.php',
-			type: 'post',
-			data: {member_id : id},
-			dataType: 'json',
-			success:function(response) {
-				$("#editName").val(response.name);
+                $("#editNivel").val(response.nivel);
 
-				$("#editAddress").val(response.address);
+                $("#editActive").val(response.active);
 
-				$("#editContact").val(response.contact);
+                $(".editMemberModal").append('<input type="hidden" name="member_id" id="member_id" value="' + response.id + '"/>');
 
-				$("#editActive").val(response.active);
+                $("#updateMemberForm").unbind('submit').bind('submit', function () {
 
-				// id do usuário
-				$(".editMemberModal").append('<input type="hidden" name="member_id" id="member_id" value="'+response.id+'"/>');
+                    $(".text-danger").remove();
 
-				// formulario de alteração do usuário
-				$("#updateMemberForm").unbind('submit').bind('submit', function() {
-					// menssagem de erro
-					$(".text-danger").remove();
+                    var form = $(this);
 
-					var form = $(this);
 
-					// validação
-					var editName = $("#editName").val();
-					var editAddress = $("#editAddress").val();
-					var editContact = $("#editContact").val();
-					var editActive = $("#editActive").val();
+                    var editName = $("#editName").val();
+                    var editEmail = $("#editEmail").val();
+                    var editNivel = $("#editNivel").val();
+                    var editActive = $("#editActive").val();
 
-					if(editName == "") {
-						$("#editName").closest('.form-group').addClass('has-error');
-						$("#editName").after('<p class="text-danger">Esqueceu de preencher o campo</p>');
-					} else {
-						$("#editName").closest('.form-group').removeClass('has-error');
-						$("#editName").closest('.form-group').addClass('has-success');
-					}
+                    if (editName == "") {
+                        $("#editName").closest('.form-group').addClass('has-error');
+                        $("#editName").after('<p class="text-danger">Digite o seu nome aqui</p>');
+                    } else {
+                        $("#editName").closest('.form-group').removeClass('has-error');
+                        $("#editName").closest('.form-group').addClass('has-success');
+                    }
 
-					if(editAddress == "") {
-						$("#editAddress").closest('.form-group').addClass('has-error');
-						$("#editAddress").after('<p class="text-danger">Esqueceu de preencher o campo</p>');
-					} else {
-						$("#editAddress").closest('.form-group').removeClass('has-error');
-						$("#editAddress").closest('.form-group').addClass('has-success');
-					}
+                    if (editEmail == "") {
+                        $("#editEmail").closest('.form-group').addClass('has-error');
+                        $("#editEmail").after('<p class="text-danger">Digite o novo email</p>');
+                    } else {
+                        $("#editEmail").closest('.form-group').removeClass('has-error');
+                        $("#editEmail").closest('.form-group').addClass('has-success');
+                    }
 
-					if(editContact == "") {
-						$("#editContact").closest('.form-group').addClass('has-error');
-						$("#editContact").after('<p class="text-danger">Esqueceu de preencher o campo</p>');
-					} else {
-						$("#editContact").closest('.form-group').removeClass('has-error');
-						$("#editContact").closest('.form-group').addClass('has-success');
-					}
+                    if (editNivel == "") {
+                        $("#editNivel").closest('.form-group').addClass('has-error');
+                        $("#editNivel").after('<p class="text-danger">Selecione o novo nivel de acesso</p>');
+                    } else {
+                        $("#editNivel").closest('.form-group').removeClass('has-error');
+                        $("#editNivel").closest('.form-group').addClass('has-success');
+                    }
 
-					if(editActive == "") {
-						$("#editActive").closest('.form-group').addClass('has-error');
-						$("#editActive").after('<p class="text-danger">Esqueceu de preencher o campo</p>');
-					} else {
-						$("#editActive").closest('.form-group').removeClass('has-error');
-						$("#editActive").closest('.form-group').addClass('has-success');
-					}
+                    if (editActive == "") {
+                        $("#editActive").closest('.form-group').addClass('has-error');
+                        $("#editActive").after('<p class="text-danger">Ative ou desative o acesso</p>');
+                    } else {
+                        $("#editActive").closest('.form-group').removeClass('has-error');
+                        $("#editActive").closest('.form-group').addClass('has-success');
+                    }
 
-					if(editName && editAddress && editContact && editActive) {
-						$.ajax({
-							url: form.attr('action'),
-							type: form.attr('method'),
-							data: form.serialize(),
-							dataType: 'json',
-							success:function(response) {
-								if(response.success == true) {
-									$(".edit-messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
-									  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-									  '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
-									'</div>');
+                    if (editName && editEmail && editNivel && editActive) {
+                        $.ajax({
+                            url: form.attr('action'),
+                            type: form.attr('method'),
+                            data: form.serialize(),
+                            dataType: 'json',
+                            success: function (response) {
+                                if (response.success == true) {
+                                    $(".edit-messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+                                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                                        '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
+                                        '</div>');
 
-									// reload the datatables
-									manageMemberTable.ajax.reload(null, false);
-									// this function is built in function of datatables;
 
-									// remove the error
-									$(".form-group").removeClass('has-success').removeClass('has-error');
-									$(".text-danger").remove();
-								} else {
-									$(".edit-messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
-									  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-									  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
-									'</div>')
-								}
-							} // /sucesso
-						}); // /ajax
-					} // /if
+                                    manageMemberTable.ajax.reload(null, false);
 
-					return false;
-				});
 
-			} // /sucesso
-		});
+                                    $(".form-group").removeClass('has-success').removeClass('has-error');
+                                    $(".text-danger").remove();
+                                } else {
+                                    $(".edit-messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+                                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                                        '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
+                                        '</div>')
+                                }
+                            } // /success
+                        }); // /ajax
+                    } // /if
 
-	} else {
-		alert("Error : Recarregue a pagina (F5)");
-	}
+                    return false;
+                });
+
+            } // /success
+        }); // /fetch selected member info
+
+    } else {
+        alert("Error : Recarregue a página (F5)");
+    }
 }
