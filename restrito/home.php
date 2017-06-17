@@ -51,18 +51,19 @@ include "protect.php";
                                     <li><a><i class="fa fa-money"></i>Receita</a>
                                         <ul class="nav child_menu">
                                             <li><a href="receita/receitaAd.php">Administração da tabela principal</a></li>
-                                            <li><a href="importacao/cadastroreceita.php">Importação de receita</a></li>
+                                            <li><a href="importacao/importareceita.php">Importação de receita</a></li>
 
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-suitcase"></i>Despesas</a>
                                         <ul class="nav child_menu">
-                                            <li><a href="despesaAd.php">Administração da tabela principal</a></li>
-                                            <li><a href="../importacao/cadastrodespesa.html">Importação de despesa</a></li>
+                                            <li><a href="despesa/despesaAd.php">Administração da tabela principal</a></li>
+                                            <li><a href="importacao/importadespesa.php">Importação de despesa</a></li>
 
                                         </ul>
                                     </li>
-                                    <li><a href="../licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a href="licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a href="cadastro/usuario.php"><i class="fa fa-group"></i>Lista de usuários</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -74,7 +75,7 @@ include "protect.php";
                             <div class="nav toggle"> <a id="menu_toggle"><i class="fa fa-bars"></i></a> </div>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal" aria-expanded="false"> <img src="../img/perfil1.jpg" alt="Perfil 1">Usuário</a>
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal" aria-expanded="false"> <img src="../img/perfil1.jpg" alt="Perfil 1">Sair</a>
                                 </li>
                             </ul>
                         </nav>
@@ -97,19 +98,19 @@ include "protect.php";
                                 </ol>
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img width="1200" height="320" src="img/teclado.jpg" alt="...">
+                                        <img width="1200" height="320" src="../img/teclado.jpg" alt="...">
                                         <div class="carousel-caption">
                                             ...
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <img src="img/teclado.jpg" alt="...">
+                                        <img src="../img/teclado.jpg" alt="...">
                                         <div class="carousel-caption">
                                             ...
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <img src="img/teclado.jpg" alt="...">
+                                        <img src="../img/teclado.jpg" alt="...">
                                         <div class="carousel-caption">
                                             ...
                                         </div>
@@ -127,7 +128,7 @@ include "protect.php";
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
-                                <img src="img/table.jpg" alt="...">
+                                <img src="../img/table.jpg" alt="...">
                                 <div class="caption">
                                     <h3>Thumbnail</h3>
                                     <p>...</p>
@@ -139,7 +140,7 @@ include "protect.php";
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-4">
                             <div class="thumbnail">
-                                <img src="img/table.jpg" alt="...">
+                                <img src="../img/table.jpg" alt="...">
                                 <div class="caption">
                                     <h3>Exemplo</h3>
                                     <p>...</p>
@@ -151,7 +152,7 @@ include "protect.php";
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
-                                <img src="img/table.jpg" alt="...">
+                                <img src="../img/table.jpg" alt="...">
                                 <div class="caption">
                                     <h3>Exemplo</h3>
                                     <p>...</p>
@@ -174,18 +175,14 @@ include "protect.php";
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
-                        <form name="loginform" method="post" action="logar.php">
+                        <form>
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Deseja realmente sair?
-                                    <p class="text-center">
-                                        <?php echo $_SESSION['usuarioNome']?>
-                                    </p>
-                                </h4>
+                                <h4 class="modal-title text-center">Deseja realmente sair?</h4>
                             </div>
                             <div class="modal-body">
-                                <button type="submit" value="entar" class="btn btn-primary">Sim</button>
-                                <button type="submit" value="entar" data-dismiss="modal" class="btn btn-danger" aria-label="Close">Não</button>
+                                <a href="logout.php" class="btn btn-primary col-xs-12 col-md-12 col-sm-12 col-lg-12">Sim</a>
+                                <button type="submit" value="entar" data-dismiss="modal" class="btn btn-danger col-xs-12 col-md-12 col-sm-12 col-lg-12" aria-label="Close">Não</button>
                             </div>
                         </form>
                     </div>

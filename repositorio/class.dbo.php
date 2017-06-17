@@ -143,17 +143,20 @@ class DBO{
         return $this->query($USUARIO);
     }
     public function cadastraUsuarios($dados){
-        $insert = "INSERT INTO usuarios(nome,email,senha,sexo,imagem,nivel,ativo) VALUES ("
-                ."'".$dados['nome']."'". ","
-                ."'".$dados['email']. "',"
-                ."'".$dados['senha']. "',"
-                ."'".$dados['sexo']. "',"
-                ."'".$dados['imagem']. "',"
-                ."'".$dados['nivel']. "',"
-                ."'".$dados['ativo']."')";
-        echo $insert;
-        $this->query($insert);
-        return mysqli_insert_id($this->mysqli);
+        $stmti=$this->mysqli->prepare("SELECT email,cpf FROM `usuarios` WHERE email=? or cpf=?");
+        $stmti->bind_param("ss",$dados['email'],$dados['cpf']);
+        $stmti->execute();
+        $stmti->bind_result($email,$cpf);
+        $stmti->store_result();
+        if($stmti->num_rows == 0){
+            $stmt=$this->mysqli->prepare("INSERT INTO `usuarios` (nome,email,senha,ativo,nivel,cpf) VALUES (?,?,?,?,?,?)");
+            $stmt->bind_param("ssssss",$dados['nome'],$dados['email'],$dados['senha'],$dados['ativo'],$dados['nivel'],$dados['cpf']);
+            $stmt->execute();
+            return '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p class="text-center"><strong>Sucesso!</strong>Usuário foi cadastrado com sucesso</p></div>';
+        }else{
+            return '<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p class="text-center"><strong>Atenção!</strong>Já existe um usuário cadastrado com esses dados</p></div>';
+        }
+
     }
     public function setReceita($dados) {
 

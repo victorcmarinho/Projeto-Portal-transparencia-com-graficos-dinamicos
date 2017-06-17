@@ -3,6 +3,7 @@ include_once "repositorio/master.php";
 session_start();
 $email =  preg_replace('/[^[]_]/', '',$_POST['email']);
 $senha =  preg_replace('/[^[:alnum:]_]/', '',$_POST['senha']);
+$senha = md5($senha);
 $stmt=$dbo->getUsuario($email,$senha);
 $stmt->bind_param('ss',$email,$senha);
 $stmt->execute();

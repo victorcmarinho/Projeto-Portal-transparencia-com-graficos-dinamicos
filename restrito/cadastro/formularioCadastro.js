@@ -11,7 +11,7 @@ $(document).ready(function () {
                         alert('Oops, temos algum erro no formulário');
                         return false;
                     } else {
-                        alert('Concluido com sucesso');
+                        btnFinish.elmform.submit();
                         elmForm.submit();
                         return false;
                     }

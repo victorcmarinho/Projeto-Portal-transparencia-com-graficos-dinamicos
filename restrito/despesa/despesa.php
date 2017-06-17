@@ -1,9 +1,11 @@
 <?php
+include "../fprotect.php";
 include_once "../../repositorio/Master.php";
 if(isset($_POST['excluir'])){
     $id = $_POST['excluir'];
-    $dbo->query("DELETE FROM receita WHERE idreceita='{$id}';");
+    $dbo->query("DELETE FROM despesa WHERE iddespesa='{$id}';");
 }
+
 ?>
     <!DOCTYPE html>
     <html lang="PT-BR">
@@ -64,7 +66,7 @@ if(isset($_POST['excluir'])){
                                     <li><a><i class="fa fa-suitcase"></i>Despesas</a>
                                         <ul class="nav child_menu">
                                             <li><a href="despesaAd.php">Administração da tabela principal</a></li>
-                                            <li><a href="importacao/cadastrodespesa.html">Importação de despesa</a></li>
+                                            <li><a href="../importacao/cadastrodespesa.html">Importação de despesa</a></li>
 
                                         </ul>
                                     </li>
@@ -87,7 +89,7 @@ if(isset($_POST['excluir'])){
                     </div>
                 </div>
                 <div id="conteudo" class="right_col" role="main">
-                    <!--                    <img style="height:200px;" id="load" src="../../img/ring-alt.svg" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">-->
+                    <!--<img style="height:200px;" id="load" src="../../img/ring-alt.svg" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">-->
                     <div id="result" class="row ">
                         <?php if(isset($_POST['excluir'])) { ?>
                         <div class="alert alert-success alert-dismissable">
@@ -102,16 +104,19 @@ if(isset($_POST['excluir'])){
                                             <table id="TabelaAD" class="table table-striped table-bordered">
                                                 <thead>
                                                     <th>ID</th>
-                                                    <th>Aplicação</th>
-                                                    <th>aplicação variável</th>
-                                                    <th>Categoria</th>
-                                                    <th>Poder</th>
-                                                    <th>Fonte</th>
-                                                    <th>Fonte do recurso</th>
-                                                    <th>Rubrica</th>
-                                                    <th>Alinea</th>
+                                                    <th>Tipo</th>
+                                                    <th>Numero do empenho</th>
+                                                    <th>Pessoa</th>
                                                     <th>Data</th>
                                                     <th>Valor</th>
+                                                    <th>Função</th>
+                                                    <th>Programa</th>
+                                                    <th>Ação</th>
+                                                    <th>Fonte de recurso</th>
+                                                    <th>Aplicação</th>
+                                                    <th>Modalidade</th>
+                                                    <th>Elemento</th>
+                                                    <th>Histórico</th>
                                                     <th>Opções de controle</th>
                                                 </thead>
                                                 <tbody>
