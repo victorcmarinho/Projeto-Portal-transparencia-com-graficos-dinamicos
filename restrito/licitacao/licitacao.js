@@ -180,7 +180,7 @@ function removeLicitacao(id = null) {
             });
         }); // click remove btn
     } else {
-        alert('Error: Refresh the page again');
+        alert('Error: Recarregue a página novamente');
     }
 }
 
@@ -220,7 +220,7 @@ function editLicitacao(id = null) {
 
                 $("#editorgao").val(response.orgao_id);
 
-                $("#editarquivo").val(response.arquivo);
+                $("#editarquivo").val().split('.').pop().toLowerCase();;
 
                 // mmeber id
                 $(".editMemberModal").append('<input type="hidden" name="member_id" id="member_id" value="' + response.idlicitacao + '"/>');
@@ -305,8 +305,10 @@ function editLicitacao(id = null) {
                         $.ajax({
                             url: form.attr('action'),
                             type: form.attr('method'),
-                            data: form.serialize(),
-//                            dataType: 'json',
+                            async: false,
+                            data: formData,
+                            //                            data: form.serialize(),
+                            dataType: 'json',
                             success: function (response) {
                                 if (response.success == true) {
                                     $(".edit-messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
@@ -338,6 +340,6 @@ function editLicitacao(id = null) {
         }); // /fetch selected member info
 
     } else {
-        alert("Error : Refresh the page again");
+        alert("Error : Recarregue a página novamente");
     }
 }

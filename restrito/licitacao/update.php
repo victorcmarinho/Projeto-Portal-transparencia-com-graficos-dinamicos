@@ -1,7 +1,7 @@
 <?php
 
 require_once '../../repositorio/master.php';
-
+session_start();
 //if form is submitted
 if($_POST) {
 
@@ -22,9 +22,9 @@ if($_POST) {
                 move_uploaded_file($_FILES['arquivo']['tmp_name'], $destination);
                 $arquivo=$new_name;
 	       }
-        $sql = "UPDATE licitacao` SET contrato = '$contrato', numero = '$numero', objetivo = '$objetivo', inicio = '$inicio' , termino = '$termino' , valor ='$valor', orgao_id='$orgao' , arquivo='$arquivo' WHERE idlicitacao = $id";
+        $sql = "UPDATE `licitacao` SET contrato = '$contrato', numero = '$numero', objetivo = '$objetivo', inicio = '$inicio' , termino = '$termino' , valor ='$valor', orgao_id='$orgao' , arquivo='$arquivo' WHERE idlicitacao = $id";
     }else{
-        $sql = "UPDATE licitacao` SET contrato = '$contrato', numero = '$numero', objetivo = '$objetivo', inicio = '$inicio' , termino = '$termino' , valor ='$valor', orgao_id='$orgao' WHERE idlicitacao = $id";
+        $sql = "UPDATE `licitacao` SET contrato = '$contrato', numero = '$numero', objetivo = '$objetivo', inicio = '$inicio' , termino = '$termino' , valor ='$valor', orgao_id='$orgao' WHERE idlicitacao = $id";
     }
     echo "$sql<br>";
 	$query = $dbo->query($sql);
@@ -37,5 +37,10 @@ if($_POST) {
 		$validator['messages'] = "Error tente novamente mais tarde";
 	}
 	echo json_encode($validator);
+    if(isset($_SESSION['location'])){
+        header("location:".$_SESSION['location']);
+    }else{
+        header("location:licitacao.php");
+    }
 
 }
