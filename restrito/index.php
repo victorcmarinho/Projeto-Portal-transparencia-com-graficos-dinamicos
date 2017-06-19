@@ -50,19 +50,19 @@ include "fprotect.php";
                                     </li>
                                     <li><a><i class="fa fa-money"></i>Receita</a>
                                         <ul class="nav child_menu">
-                                            <li><a href="receita/receitaAd.php">Administração da tabela principal</a></li>
+                                            <li><a href="receita/receita.php">Administração da tabela principal</a></li>
                                             <li><a href="importacao/importareceita.php">Importação de receita</a></li>
 
                                         </ul>
                                     </li>
                                     <li><a><i class="fa fa-suitcase"></i>Despesas</a>
                                         <ul class="nav child_menu">
-                                            <li><a href="despesa/despesaAd.php">Administração da tabela principal</a></li>
+                                            <li><a href="despesa/despesa.php">Administração da tabela principal</a></li>
                                             <li><a href="importacao/importadespesa.php">Importação de despesa</a></li>
 
                                         </ul>
                                     </li>
-                                    <li><a href="licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a href="../licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -46,11 +46,24 @@ include "../protect.php";
                             <div class="menu_section">
                                 <h3>Menu</h3>
                                 <ul class="nav side-menu">
-                                    <li><a href="index.html"><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
+                                    <li><a href="../home.php"><i class="fa fa-home"></i>Home<span class="label label-success pull-right">Beta</span></a>
                                     </li>
-                                    <li><a href="Receita/Receita.html"><i class="fa fa-money"></i>Receita</a></li>
-                                    <li><a><i class="fa fa-suitcase"></i>Despesas</a></li>
-                                    <li><a><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a><i class="fa fa-money"></i>Receita</a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="../receita/receitaAd.php">Administração da tabela principal</a></li>
+                                            <li><a href="../importacao/importareceitaAd.php">Importação de receita</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-suitcase"></i>Despesas</a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="../despesa/despesaAd.php">Administração da tabela principal</a></li>
+                                            <li><a href="../importacao/importadespesaAd.php">Importação de despesa</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a href="../licitacao/licitacaoAd.php"><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a href="usuario.php"><i class="fa fa-group"></i>Lista de usuários</a></li>
                                 </ul>
                             </div>
                         </div>
