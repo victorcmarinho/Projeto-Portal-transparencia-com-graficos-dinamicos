@@ -3,6 +3,7 @@ var manageMemberTable;
 
 $(document).ready(function () {
     manageMemberTable = $("#usuarioTable").DataTable({
+
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -83,13 +84,13 @@ function editMember(id = null) {
             },
             dataType: 'json',
             success: function (response) {
-                $("#editName").val(response.name);
+                $("#editName").val(response.nome);
 
                 $("#editEmail").val(response.email);
 
                 $("#editNivel").val(response.nivel);
 
-                $("#editActive").val(response.active);
+                $("#editActive").val(response.ativo);
 
                 $(".editMemberModal").append('<input type="hidden" name="member_id" id="member_id" value="' + response.id + '"/>');
 

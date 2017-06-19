@@ -69,46 +69,45 @@ include "../protect.php";
                     </div>
                 </div>
                 <div class="right_col" role="main">
-                    <div class="row panel panel-default">
-                        <div class="panel-body">
-                            <div class="tab-content">
-                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                                    <?php
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 ">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="tab-content">
+
+                                        <?php
                                         if(isset($_SESSION['mensagem'])){
                                             echo $_SESSION['mensagem'];
                                             unset($_SESSION['mensagem']);
                                         }
                                     ?>
-                                        <center>
-                                            <h1 class="page-header">Lista de usuários </h1>
-                                        </center>
-                                        <div class="removeMessages"></div>
-                                        <button class="btn btn-default pull pull-right" data-toggle="modal" data-target="#cadastro" id="addMemberModalBtn"><span class="glyphicon glyphicon-plus-sign"></span>	Adicionar um novo usuário</button>
-                                        <br /> <br /> <br />
+                                            <center>
+                                                <h1 class="page-header">Lista de usuários </h1>
+                                            </center>
+                                            <div class="removeMessages"></div>
+                                            <button class="btn btn-default pull pull-right" data-toggle="modal" data-target="#cadastro" id="addMemberModalBtn"><span class="glyphicon glyphicon-plus-sign"></span>	Adicionar um novo usuário</button>
+                                            <br /> <br /> <br />
 
-                                        <table class="table table-striped table-bordered" id="usuarioTable">
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Nome</th>
-                                                    <th>Email</th>
-                                                    <th>Ativado</th>
-                                                    <th>Nivel</th>
-                                                    <th>CPF</th>
-                                                    <th>Opções</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                            <table class="table table-striped table-bordered" id="usuarioTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Nome</th>
+                                                        <th>Email</th>
+                                                        <th>Ativado</th>
+                                                        <th>Nivel</th>
+                                                        <th>CPF</th>
+                                                        <th>Opções</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <footer>
-                        <div class="pull-right"> Modelo Dashboard - Feito por <a href="#">.....</a> </div>
-                        <div class="clearfix"></div>
-                    </footer>
                 </div>
             </div>
 
@@ -323,6 +322,10 @@ include "../protect.php";
                 </div>
             </div>
         </div>
+        <footer>
+            <div class="pull-right"> Modelo Dashboard - Feito por <a href="#">.....</a> </div>
+            <div class="clearfix"></div>
+        </footer>
         <script src="../../vendors/jquery/jquery-3.2.0.min.js"></script>
         <script src="../../vendors/bootstrap/js/bootstrap.min.js"></script>
         <script src="../../build/js/custom.min.js"></script>

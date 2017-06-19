@@ -1,0 +1,420 @@
+
+create.php cria no banco de dados o usuário
+<?php 
+
+require_once 'db_connect.php';
+
+//if form is submitted
+if($_POST) {	
+
+	$validator = array('success' => false, 'messages' => array());
+
+	$name = $_POST['name'];
+	$address = $_POST['address'];
+	$contact = $_POST['contact'];
+	$active = $_POST['active'];
+
+	$sql = "INSERT INTO members (name, contact, address, active) VALUES ('$name', '$contact', '$address', '$active')";
+	$query = $connect->query($sql);
+
+	if($query === TRUE) {			
+		$validator['success'] = true;
+		$validator['messages'] = "Successfully Added";		
+	} else {		
+		$validator['success'] = false;
+		$validator['messages'] = "Error while adding the member information";
+	}
+
+	// close the database connection
+	$connect->close();
+
+	echo json_encode($validator);
+
+}
+
+
+pega um membro
+
+<?php 
+
+require_once 'db_connect.php';
+
+$memberId = $_POST['member_id'];
+
+$sql = "SELECT * FROM members WHERE id = $memberId";
+$query = $connect->query($sql);
+$result = $query->fetch_assoc();
+
+$connect->close();
+
+echo json_encode($result);
+
+remove um membro -------
+
+<?php 
+
+require_once 'db_connect.php';
+
+$output = array('success' => false, 'messages' => array());
+
+$memberId = $_POST['member_id'];
+
+$sql = "DELETE FROM members WHERE id = {$memberId}";
+$query = $connect->query($sql);
+if($query === TRUE) {
+	$output['success'] = true;
+	$output['messages'] = 'Successfully removed';
+} else {
+	$output['success'] = false;
+	$output['messages'] = 'Error while removing the member information';
+}
+
+// close database connection
+$connect->close();
+
+echo json_encode($output);
+
+
+
+
+----------cria json da tabela do usuário ------
+<?php 
+
+require_once 'db_connect.php';
+
+$output = array('data' => array());
+
+$sql = "SELECT * FROM members";
+$query = $connect->query($sql);
+
+$x = 1;
+while ($row = $query->fetch_assoc()) {
+	$active = '';
+	if($row['active'] == 1) {
+		$active = '<label class="label label-success">Ativado</label>';
+	} else {
+		$active = '<label class="label label-danger">Desativado</label>'; 
+	}
+
+	$actionButton = '
+	<div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    Action <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a type="button" data-toggle="modal" data-target="#editMemberModal" onclick="editMember('.$row['id'].')"> <span class="glyphicon glyphicon-edit"></span> Editar usuário </a></li>
+	    <li><a type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeMember('.$row['id'].')"> <span class="glyphicon glyphicon-trash"></span> Remover usuário</a></li>	    
+	  </ul>
+	</div>
+		';
+
+	$output['data'][] = array(
+		$x,
+		$row['name'],
+		$row['address'],
+		$row['contact'],
+		$active,
+		$actionButton
+	);
+
+	$x++;
+}
+
+// database connection close
+$connect->close();
+
+echo json_encode($output);
+
+
+---------------------edita o usuário --------
+<?php 
+
+require_once 'db_connect.php';
+
+//if form is submitted
+if($_POST) {	
+
+	$validator = array('success' => false, 'messages' => array());
+
+	$id = $_POST['member_id'];
+	$name = $_POST['editName'];
+	$address = $_POST['editAddress'];
+	$contact = $_POST['editContact'];
+	$active = $_POST['editActive'];
+
+	$sql = "UPDATE members SET name = '$name', contact = '$contact', address = '$address', active = '$active' WHERE id = $id";
+	$query = $connect->query($sql);
+
+	if($query === TRUE) {			
+		$validator['success'] = true;
+		$validator['messages'] = "Successfully Added";		
+	} else {		
+		$validator['success'] = false;
+		$validator['messages'] = "Error while adding the member information";
+	}
+
+	// close the database connection
+	$connect->close();
+
+	echo json_encode($validator);
+
+}
+
+
+------------JavaScripts ---------
+// global the manage memeber table 
+var manageMemberTable;
+
+$(document).ready(function() {
+	manageMemberTable = $("#manageMemberTable").DataTable({
+		"ajax": "php_action/retrieve.php",
+		"order": []
+	});
+
+	$("#addMemberModalBtn").on('click', function() {
+		// reset the form 
+		$("#createMemberForm")[0].reset();
+		// remove the error 
+		$(".form-group").removeClass('has-error').removeClass('has-success');
+		$(".text-danger").remove();
+		// empty the message div
+		$(".messages").html("");
+
+		// submit form
+		$("#createMemberForm").unbind('submit').bind('submit', function() {
+
+			$(".text-danger").remove();
+
+			var form = $(this);
+
+			// validation
+			var name = $("#name").val();
+			var address = $("#address").val();
+			var contact = $("#contact").val();
+			var active = $("#active").val();
+
+			if(name == "") {
+				$("#name").closest('.form-group').addClass('has-error');
+				$("#name").after('<p class="text-danger">The Name field is required</p>');
+			} else {
+				$("#name").closest('.form-group').removeClass('has-error');
+				$("#name").closest('.form-group').addClass('has-success');				
+			}
+
+			if(address == "") {
+				$("#address").closest('.form-group').addClass('has-error');
+				$("#address").after('<p class="text-danger">The Address field is required</p>');
+			} else {
+				$("#address").closest('.form-group').removeClass('has-error');
+				$("#address").closest('.form-group').addClass('has-success');				
+			}
+
+			if(contact == "") {
+				$("#contact").closest('.form-group').addClass('has-error');
+				$("#contact").after('<p class="text-danger">The Contact field is required</p>');
+			} else {
+				$("#contact").closest('.form-group').removeClass('has-error');
+				$("#contact").closest('.form-group').addClass('has-success');				
+			}
+
+			if(active == "") {
+				$("#active").closest('.form-group').addClass('has-error');
+				$("#active").after('<p class="text-danger">The Active field is required</p>');
+			} else {
+				$("#active").closest('.form-group').removeClass('has-error');
+				$("#active").closest('.form-group').addClass('has-success');				
+			}
+
+			if(name && address && contact && active) {
+				//submi the form to server
+				$.ajax({
+					url : form.attr('action'),
+					type : form.attr('method'),
+					data : form.serialize(),
+					dataType : 'json',
+					success:function(response) {
+
+						// remove the error 
+						$(".form-group").removeClass('has-error').removeClass('has-success');
+
+						if(response.success == true) {
+							$(".messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
+							  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+							  '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
+							'</div>');
+
+							// reset the form
+							$("#createMemberForm")[0].reset();		
+
+							// reload the datatables
+							manageMemberTable.ajax.reload(null, false);
+							// this function is built in function of datatables;
+
+						} else {
+							$(".messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
+							  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+							  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
+							'</div>');
+						}  // /else
+					} // success  
+				}); // ajax subit 				
+			} /// if
+
+
+			return false;
+		}); // /submit form for create member
+	}); // /add modal
+
+});
+
+function removeMember(id = null) {
+	if(id) {
+		// click on remove button
+		$("#removeBtn").unbind('click').bind('click', function() {
+			$.ajax({
+				url: 'php_action/remove.php',
+				type: 'post',
+				data: {member_id : id},
+				dataType: 'json',
+				success:function(response) {
+					if(response.success == true) {						
+						$(".removeMessages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
+							  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+							  '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
+							'</div>');
+
+						// refresh the table
+						manageMemberTable.ajax.reload(null, false);
+
+						// close the modal
+						$("#removeMemberModal").modal('hide');
+
+					} else {
+						$(".removeMessages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
+							  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+							  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
+							'</div>');
+					}
+				}
+			});
+		}); // click remove btn
+	} else {
+		alert('Error: Refresh the page again');
+	}
+}
+
+function editMember(id = null) {
+	if(id) {
+
+		// remove the error 
+		$(".form-group").removeClass('has-error').removeClass('has-success');
+		$(".text-danger").remove();
+		// empty the message div
+		$(".edit-messages").html("");
+
+		// remove the id
+		$("#member_id").remove();
+
+		// fetch the member data
+		$.ajax({
+			url: 'php_action/getSelectedMember.php',
+			type: 'post',
+			data: {member_id : id},
+			dataType: 'json',
+			success:function(response) {
+				$("#editName").val(response.name);
+
+				$("#editAddress").val(response.address);
+
+				$("#editContact").val(response.contact);
+
+				$("#editActive").val(response.active);	
+
+				// mmeber id 
+				$(".editMemberModal").append('<input type="hidden" name="member_id" id="member_id" value="'+response.id+'"/>');
+
+				// here update the member data
+				$("#updateMemberForm").unbind('submit').bind('submit', function() {
+					// remove error messages
+					$(".text-danger").remove();
+
+					var form = $(this);
+
+					// validation
+					var editName = $("#editName").val();
+					var editAddress = $("#editAddress").val();
+					var editContact = $("#editContact").val();
+					var editActive = $("#editActive").val();
+
+					if(editName == "") {
+						$("#editName").closest('.form-group').addClass('has-error');
+						$("#editName").after('<p class="text-danger">The Name field is required</p>');
+					} else {
+						$("#editName").closest('.form-group').removeClass('has-error');
+						$("#editName").closest('.form-group').addClass('has-success');				
+					}
+
+					if(editAddress == "") {
+						$("#editAddress").closest('.form-group').addClass('has-error');
+						$("#editAddress").after('<p class="text-danger">The Address field is required</p>');
+					} else {
+						$("#editAddress").closest('.form-group').removeClass('has-error');
+						$("#editAddress").closest('.form-group').addClass('has-success');				
+					}
+
+					if(editContact == "") {
+						$("#editContact").closest('.form-group').addClass('has-error');
+						$("#editContact").after('<p class="text-danger">The Contact field is required</p>');
+					} else {
+						$("#editContact").closest('.form-group').removeClass('has-error');
+						$("#editContact").closest('.form-group').addClass('has-success');				
+					}
+
+					if(editActive == "") {
+						$("#editActive").closest('.form-group').addClass('has-error');
+						$("#editActive").after('<p class="text-danger">The Active field is required</p>');
+					} else {
+						$("#editActive").closest('.form-group').removeClass('has-error');
+						$("#editActive").closest('.form-group').addClass('has-success');				
+					}
+
+					if(editName && editAddress && editContact && editActive) {
+						$.ajax({
+							url: form.attr('action'),
+							type: form.attr('method'),
+							data: form.serialize(),
+							dataType: 'json',
+							success:function(response) {
+								if(response.success == true) {
+									$(".edit-messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
+									  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+									  '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>'+response.messages+
+									'</div>');
+
+									// reload the datatables
+									manageMemberTable.ajax.reload(null, false);
+									// this function is built in function of datatables;
+
+									// remove the error 
+									$(".form-group").removeClass('has-success').removeClass('has-error');
+									$(".text-danger").remove();
+								} else {
+									$(".edit-messages").html('<div class="alert alert-warning alert-dismissible" role="alert">'+
+									  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+									  '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>'+response.messages+
+									'</div>')
+								}
+							} // /success
+						}); // /ajax
+					} // /if
+
+					return false;
+				});
+
+			} // /success
+		}); // /fetch selected member info
+
+	} else {
+		alert("Error : Refresh the page again");
+	}
+}

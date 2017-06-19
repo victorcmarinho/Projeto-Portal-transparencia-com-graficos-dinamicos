@@ -264,5 +264,9 @@ class DBO{
         $stmt =$this->mysqli->prepare("SELECT id,nome,email,senha,nivel,ativo FROM `usuarios` WHERE email=? and senha=? LIMIT 1");
         return $stmt;
     }
+    public function prepare($sql){
+        $stmt =$this->mysqli->prepare($sql);
+        return $stmt;
+    }
 }
 ?>
