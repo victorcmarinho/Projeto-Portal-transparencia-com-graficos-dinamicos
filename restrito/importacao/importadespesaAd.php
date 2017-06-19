@@ -73,7 +73,7 @@ include "../protect.php";
                             <div class="nav toggle"> <a id="menu_toggle"><i class="fa fa-bars"></i></a> </div>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal" aria-expanded="false"> <img src="../../img/perfil1.jpg" alt="Perfil 1">Usuário</a>
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal" aria-expanded="false"> <img src="../../img/perfil1.jpg" alt="Perfil 1">Sair</a>
                                 </li>
                             </ul>
                         </nav>
@@ -155,37 +155,24 @@ include "../protect.php";
         </div>
         <div class="container">
             <!-- todas as Modais aqui --->
+            <div class="container">
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
-                        <form name="loginform" method="post" action="logar.php">
+                        <form>
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Entre com os seus dados</h4>
+                                <h4 class="modal-title text-center">Deseja realmente sair?</h4>
                             </div>
                             <div class="modal-body">
-                                <img id="profile-img" class="profile-img-card" src="../../img/avatar2.png" />
-
-                                <div class="form-signin">
-                                    <p id="profile-name" class="profile-name-card">Nome depois de salvo</p>
-                                    <span id="reauth-email" class="reauth-email"></span>
-                                    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Endereço de Email" required autofocus>
-                                    <input type="password" id="inputPassword" name="senha" class="form-control" placeholder="Senha" required>
-                                    <div id="remember" class="checkbox">
-                                        <label>
-                                        <input type="checkbox" value="relembre">Relembre me
-                                    </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Esqueceu sua senha?</button>
-                                <button type="submit" onclick="hash()" value="entar" class="btn btn-primary">Entrar</button>
+                                <a href="../logout.php" class="btn btn-primary col-xs-12 col-md-12 col-sm-12 col-lg-12">Sim</a>
+                                <button type="submit" value="entar" data-dismiss="modal" class="btn btn-danger col-xs-12 col-md-12 col-sm-12 col-lg-12" aria-label="Close">Não</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         <script src="../../vendors/jquery/jquery-3.2.1.min.js"></script>

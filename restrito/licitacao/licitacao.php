@@ -1,6 +1,7 @@
 <?php
-include "../protect.php";
+include "../fprotect.php";
 include_once "../../repositorio/master.php";
+$_SESSION['location']="licitacao.php";
 ?>
     <!DOCTYPE html>
     <html lang="pt-br">

@@ -320,7 +320,24 @@ $_SESSION['location']="licitacaoAd.php";
         </div>
         <!-- /.modal -->
         <!-- /edit modal -->
-
+        <div class="container">
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title text-center">Deseja realmente sair?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <a href="../logout.php" class="btn btn-primary col-xs-12 col-md-12 col-sm-12 col-lg-12">Sim</a>
+                                <button type="submit" value="entar" data-dismiss="modal" class="btn btn-danger col-xs-12 col-md-12 col-sm-12 col-lg-12" aria-label="Close">Não</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer>
             <div class="pull-right"> Modelo Dashboard - Feito por <a href="#">.....</a> </div>
             <div class="clearfix"></div>

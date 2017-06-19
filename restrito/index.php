@@ -62,7 +62,7 @@ include "fprotect.php";
 
                                         </ul>
                                     </li>
-                                    <li><a href="../licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
+                                    <li><a href="licitacao/licitacao.php"><i class="fa fa-file-text"></i>Licitações</a></li>
                                 </ul>
                             </div>
                         </div>

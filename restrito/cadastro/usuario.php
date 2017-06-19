@@ -75,7 +75,7 @@ include "../protect.php";
                             <div class="nav toggle"> <a id="menu_toggle"><i class="fa fa-bars"></i></a> </div>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal"> <img src="../../img/perfil1.jpg" alt="Perfil 1">Usuário</a>
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal"> <img src="../../img/perfil1.jpg" alt="Perfil 1">Sair</a>
                                 </li>
                             </ul>
                         </nav>

@@ -81,7 +81,7 @@ if(isset($_POST['excluir'])){
                             <div class="nav toggle"> <a id="menu_toggle"><i class="fa fa-bars"></i></a> </div>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal" aria-expanded="false"> <img src="../../img/perfil1.jpg" alt="Perfil 1">Usuário</a>
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="modal" data-target="#myModal" aria-expanded="false"> <img src="../../img/perfil1.jpg" alt="Perfil 1">Sair</a>
                                 </li>
                             </ul>
                         </nav>
@@ -211,6 +211,24 @@ if(isset($_POST['excluir'])){
                     </div>
                 </div>
             </div>
+            <div class="container">
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <form>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title text-center">Deseja realmente sair?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <a href="../logout.php" class="btn btn-primary col-xs-12 col-md-12 col-sm-12 col-lg-12">Sim</a>
+                                <button type="submit" value="entar" data-dismiss="modal" class="btn btn-danger col-xs-12 col-md-12 col-sm-12 col-lg-12" aria-label="Close">Não</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
         <script src="../../vendors/jquery/jquery-1.12.4.js"></script>
         <script src="../../vendors/bootstrap/js/bootstrap.min.js"></script>

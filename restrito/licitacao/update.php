@@ -37,10 +37,8 @@ if($_POST) {
 		$validator['messages'] = "Error tente novamente mais tarde";
 	}
 	echo json_encode($validator);
-    if(isset($_SESSION['location'])){
-        header("location:".$_SESSION['location']);
-    }else{
-        header("location:licitacao.php");
-    }
+
+    header("location:".$_SESSION['location']);
+
 
 }
